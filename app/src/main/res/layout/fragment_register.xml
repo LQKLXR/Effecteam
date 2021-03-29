@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="180dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:background="@drawable/drawable_login_phone_background"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/input_phoneNumber_register_edit"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="right"
+            android:background="@null"
+            android:hint="请输入账号" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/drawable_login_pswd_background"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/input_password_register_edit"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="right"
+            android:background="@null"
+            android:hint="请输入密码"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/drawable_login_pswd_background"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/input_password_register_edit_re"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_gravity="right"
+            android:background="@null"
+            android:hint="请确认密码"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/register_button"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/drawable_login_submit_background"
+        android:text="立即注册"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+
+</LinearLayout>

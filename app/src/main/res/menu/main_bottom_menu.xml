@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bottom_home_item"
+        android:icon="@drawable/drawable_home_normal"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/bottom_projects_item"
+        android:icon="@drawable/drawable_projects_normal"
+        android:title="@string/title_projects" />
+
+    <item
+        android:id="@+id/bottom_contacts_item"
+        android:icon="@drawable/drawable_contacts_normal"
+        android:title="@string/title_teams" />
+
+    <item
+        android:id="@+id/bottom_person_item"
+        android:icon="@drawable/drawable_person_normal"
+        android:title="@string/title_person" />
+</menu>
