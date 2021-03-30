@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:text="团队"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"/>
+
+        <ImageButton
+            android:id="@+id/team_list_add_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#FFFFFF"
+            android:src="@drawable/drawable_contacts_button_add"
+            android:scaleType="fitCenter"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"/>
+    </RelativeLayout>
+
+    <SearchView
+        android:id="@+id/team_list_search"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:queryHint="搜索团队名称"
+        android:layout_marginTop="5dp"
+        android:iconifiedByDefault="false"></SearchView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/team_list_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp">
+        
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>

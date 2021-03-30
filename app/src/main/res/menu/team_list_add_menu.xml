@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/team_list_join_team_menu"
+        android:title="加入团队">
+    </item>
+
+    <item
+        android:id="@+id/team_list_create_team_menu"
+        android:title="创建团队">
+    </item>
+</menu>

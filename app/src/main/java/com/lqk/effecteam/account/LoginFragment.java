@@ -1,5 +1,6 @@
 package com.lqk.effecteam.account;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,9 +17,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.HttpUtil;
+import com.lqk.effecteam.main.MainActivity;
 
 import java.io.IOException;
 
@@ -80,7 +83,9 @@ public class LoginFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 Log.d("登录Fragment", "onClick: 点击了登录");
-                login(mInputPhoneNumber.getText().toString(), mInputPasswordText.getText().toString());
+                //login(mInputPhoneNumber.getText().toString(), mInputPasswordText.getText().toString());
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
             }
         });
         /*点击去注册文字*/
