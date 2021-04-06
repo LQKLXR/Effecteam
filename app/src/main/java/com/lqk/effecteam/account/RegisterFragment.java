@@ -99,6 +99,7 @@ public class RegisterFragment extends Fragment {
                     return;
                 }
                 String phoneNumberString = mInputPhoneNumber.getText().toString();
+                /* TODO 注册时候的网络接口处理 */
                 FormBody formBody = new FormBody.Builder().add("", phoneNumberString).add("", passwordString).build();
                 String urlString = "";
                 HttpUtil.connectInternet(urlString, formBody, new Callback() {

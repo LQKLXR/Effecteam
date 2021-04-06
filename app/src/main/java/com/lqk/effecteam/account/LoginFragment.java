@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.lqk.effecteam.R;
@@ -83,9 +84,12 @@ public class LoginFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 Log.d("登录Fragment", "onClick: 点击了登录");
+                AccountActivity activity = (AccountActivity) getActivity();
+                activity.openLoading();
                 //login(mInputPhoneNumber.getText().toString(), mInputPasswordText.getText().toString());
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
+
             }
         });
         /*点击去注册文字*/
@@ -96,7 +100,7 @@ public class LoginFragment extends Fragment{
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_login, registerFragment).commit();
             }
         });
-
+        /*在手机号处点击回车键*/
         mInputPhoneNumber.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -113,7 +117,7 @@ public class LoginFragment extends Fragment{
     }
 
     /**
-     * 登录的处理
+     * TODO 登录的网络接口处理
      * @param userName
      * @param password
      */
@@ -121,6 +125,7 @@ public class LoginFragment extends Fragment{
          new Thread(new Runnable() {
             @Override
             public void run() {
+                /*TODO 登录接口*/
                 OkHttpClient okHttpClient = new OkHttpClient();
                 FormBody formBody = new FormBody.Builder().add("inputPhoneNumber", "15207155054").add("inputPassword", "lvxinru521").build();
                 Request request = new Request.Builder().url(HttpUtil.ServerIP + "login").post(formBody).build();

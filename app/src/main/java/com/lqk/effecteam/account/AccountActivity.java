@@ -17,12 +17,11 @@ import com.lqk.effecteam.common.BaseActivity;
 public class AccountActivity extends BaseActivity {
     /*储存内容的fragment*/
     private Fragment mFragment;
-
+    /*加载进度条*/
     private ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
@@ -32,11 +31,20 @@ public class AccountActivity extends BaseActivity {
      */
     public void initView() {
         mProgressBar = findViewById(R.id.progressbar_login);
-        mProgressBar.setVisibility(View.VISIBLE);
+        mProgressBar.setVisibility(View.INVISIBLE);
         FragmentManager supportFragmentManager = getSupportFragmentManager();
         /*默认是登录的Fragment*/
         mFragment = new LoginFragment();
         supportFragmentManager.beginTransaction().add(R.id.fragment_login, mFragment).commit();
     }
 
+
+    public void openLoading(){
+        mProgressBar.setVisibility(View.VISIBLE);
+        mFragment.getView().setVisibility(View.INVISIBLE);
+    }
+
+    public void closeLoading(){
+
+    }
 }

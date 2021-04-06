@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
-import com.lqk.effecteam.teamlist.TeamFragment;
+import com.lqk.effecteam.team.list.TeamFragment;
 
 /**
  * 主界面的Activity
@@ -65,4 +65,5 @@ public class MainActivity extends BaseActivity {
         TeamFragment teamFragment = new TeamFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.nav_host_fragment, teamFragment).commit();
     }
+
 }

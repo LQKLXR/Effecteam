@@ -1,4 +1,4 @@
-package com.lqk.effecteam.teamlist;
+package com.lqk.effecteam.team.list;
 
 /**
  * Create By LiuQK on 2021/3/30
@@ -6,7 +6,7 @@ package com.lqk.effecteam.teamlist;
  */
 public class Team {
     /*团队ID*/
-    private String teamId;
+    private int teamId;
     /*团队号码*/
     private String teamNumber;
     /*团队名称*/
@@ -16,7 +16,7 @@ public class Team {
     /*团队机构*/
     private String teamOrganization;
 
-    public Team(String teamId, String teamNumber, String teamName, String teamInfo, String teamOrganization) {
+    public Team(int teamId, String teamNumber, String teamName, String teamInfo, String teamOrganization) {
         this.teamId = teamId;
         this.teamNumber = teamNumber;
         this.teamName = teamName;
@@ -24,11 +24,11 @@ public class Team {
         this.teamOrganization = teamOrganization;
     }
 
-    public String getTeamId() {
+    public int getTeamId() {
         return teamId;
     }
 
-    public void setTeamId(String teamId) {
+    public void setTeamId(int teamId) {
         this.teamId = teamId;
     }
 

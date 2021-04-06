@@ -2,25 +2,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.lqk.effecteam">
-    <!--网络权限开启-->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 网络权限开启 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/lanuch_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:strict=""
-        android:theme="@style/AppTheme">
+        tools:strict="">
+        <activity android:name=".team.home.TeamHomeActivity"></activity>
+        <activity android:name=".team.chat.TeamChatActivity" />
+        <activity android:name=".team.join.JoinTeamActivity" />
+        <activity android:name=".team.create.CreateTeamActivity" />
         <activity android:name=".account.AccountActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainActivity">
-        </activity>
+        <activity android:name=".main.MainActivity" />
     </application>
 
 </manifest>

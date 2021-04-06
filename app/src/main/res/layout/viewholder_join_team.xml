@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginTop="5dp">
+
+    <LinearLayout
+        android:id="@+id/linear_join_team_1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:layout_marginRight="10dp">
+        <TextView
+            android:id="@+id/viewholder_join_team_name"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="match_parent"
+            android:textSize="20sp"
+            android:textColor="@color/BLACK"
+            android:text=""
+            android:gravity="left"
+            android:layout_marginLeft="20dp"/>
+        <Button
+            android:id="@+id/viewholder_join_team_request_button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="申请"
+            android:background="@color/softPrimary"
+            android:textColor="@color/WHITE"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_join_team_2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/linear_join_team_1"
+        android:orientation="horizontal"
+        android:layout_marginRight="10dp">
+    <TextView
+            android:id="@+id/viewholder_join_team_ower"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="所有者："
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/viewholder_join_team_number"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="团队号码："
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/linear_join_team_2"
+        android:orientation="horizontal"
+        android:layout_marginRight="10dp">
+        <TextView
+            android:id="@+id/viewholder_join_team_org"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="团队机构："
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/viewholder_join_team_count"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="团队人数："
+            android:gravity="center_vertical"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
