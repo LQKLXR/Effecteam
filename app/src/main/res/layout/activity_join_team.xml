@@ -26,7 +26,7 @@
         android:layout_marginTop="20dp"
         android:text="搜索团队"
         android:textColor="@color/BLACK"
-        android:textSize="20sp"/>
+        android:textSize="15sp"/>
 
     <SearchView
         android:id="@+id/join_team_search"

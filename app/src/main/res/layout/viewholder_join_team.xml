@@ -23,12 +23,11 @@
             android:layout_marginLeft="20dp"/>
         <Button
             android:id="@+id/viewholder_join_team_request_button"
+            style="@style/Button.Blue"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="申请"
-            android:background="@color/softPrimary"
-            android:textColor="@color/WHITE"
             />
     </LinearLayout>
 
@@ -44,7 +43,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="所有者："
             android:gravity="center_vertical"
             android:layout_marginLeft="20dp"/>
         <TextView
@@ -52,7 +50,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="团队号码："
             android:gravity="center_vertical"/>
     </LinearLayout>
     <LinearLayout
@@ -66,7 +63,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="团队机构："
             android:gravity="center_vertical"
             android:layout_marginLeft="20dp"/>
         <TextView
@@ -74,7 +70,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="团队人数："
             android:gravity="center_vertical"/>
     </LinearLayout>
 

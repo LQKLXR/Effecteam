@@ -11,8 +11,8 @@
         <TextView
             android:layout_width="100dp"
             android:layout_height="40dp"
-            android:text="团队"
-            android:textSize="20sp"
+            android:text="团队列表"
+            android:textSize="15sp"
             android:gravity="center"
             android:textColor="@color/BLACK"
             android:layout_centerHorizontal="true"

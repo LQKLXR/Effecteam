@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
+import com.lqk.effecteam.team.list.Team;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,11 @@ import java.util.List;
  */
 public class JoinTeamAdapter extends RecyclerView.Adapter<JoinTeamAdapter.JoinTeamViewHolder> {
 
+    private List<Team> teamList;
 
+    public JoinTeamAdapter(List<Team> teamList) {
+        this.teamList = teamList;
+    }
 
     @NonNull
     @Override
@@ -33,19 +38,26 @@ public class JoinTeamAdapter extends RecyclerView.Adapter<JoinTeamAdapter.JoinTe
     @Override
     public void onBindViewHolder(@NonNull JoinTeamAdapter.JoinTeamViewHolder holder, int position) {
         /* TODO 模拟数据待修改为真实数据 */
-        holder.mTeamName.setText(holder.mTeamName.getText().toString() + teamNameList.get(position));
-        holder.mTeamOrganization.setText(holder.mTeamOrganization.getText().toString() + teamOrganizationList.get(position));
-        holder.mTeamOwner.setText(holder.mTeamOwner.getText().toString() + teamOwnerList.get(position));
-        holder.mTeamNumber.setText(holder.mTeamNumber.getText().toString() + teamNumberList.get(position));
-        holder.mTeamCount.setText(holder.mTeamCount.getText().toString() + teamCountList.get(position) + "人");
+        holder.mTeamName.setText(teamList.get(position).getTeamName());
+        holder.mTeamOrganization.setText("团队机构: " + teamList.get(position).getTeamOrganization());
+        holder.mTeamOwner.setText("创始人: 测试");
+        holder.mTeamNumber.setText("团队号码: " + teamList.get(position).getTeamNumber());
+        holder.mTeamCount.setText("团队人数: 5人");
     }
 
     @Override
     public int getItemCount() {
         /* TODO 模拟数据待修改为真实数据 */
-        return teamNameList.size();
+        return teamList.size();
     }
 
+    public List<Team> getTeamList() {
+        return teamList;
+    }
+
+    public void setTeamList(List<Team> teamList) {
+        this.teamList = teamList;
+    }
 
     class JoinTeamViewHolder extends RecyclerView.ViewHolder{
 
@@ -89,56 +101,4 @@ public class JoinTeamAdapter extends RecyclerView.Adapter<JoinTeamAdapter.JoinTe
         }
     }
 
-    /*模拟数据****************************************************************/
-    /* TODO 以后要删除的虚拟数据 */
-    public void search(String string){
-        
-    }
-
-    /*模拟全部团队*/
-    private static List<String> teamNameList = new ArrayList<>();
-    private static List<String> teamOwnerList = new ArrayList<>();
-    private static List<String> teamOrganizationList = new ArrayList<>();
-    private static List<String> teamNumberList = new ArrayList<>();
-    private static List<String> teamCountList = new ArrayList<>();
-
-    static {
-        /*第1支团队*/
-        teamNameList.add("测试团队1");
-        teamOwnerList.add("测试拥有者1");
-        teamOrganizationList.add("测试机构1");
-        teamNumberList.add("1111111");
-        teamCountList.add("111");
-        /*第2支团队*/
-        teamNameList.add("测试团队2");
-        teamOwnerList.add("测试拥有者2");
-        teamOrganizationList.add("测试机构2");
-        teamNumberList.add("2222");
-        teamCountList.add("222");
-        /*第3支团队*/
-        teamNameList.add("测试团队3");
-        teamOwnerList.add("测试拥有者3");
-        teamOrganizationList.add("测试机构3");
-        teamNumberList.add("333333");
-        teamCountList.add("33");
-        /*第4支团队*/
-        teamNameList.add("测试团队4");
-        teamOwnerList.add("测试拥有者4");
-        teamOrganizationList.add("测试机构4");
-        teamNumberList.add("4444444");
-        teamCountList.add("444");
-        /*第5支团队*/
-        teamNameList.add("测试团队5");
-        teamOwnerList.add("测试拥有者5");
-        teamOrganizationList.add("测试机构5");
-        teamNumberList.add("5555555");
-        teamCountList.add("5");
-        /*第6支团队*/
-        teamNameList.add("测试团队6");
-        teamOwnerList.add("测试拥有者6");
-        teamOrganizationList.add("测试机构6");
-        teamNumberList.add("6666666");
-        teamCountList.add("666");
-
-    }
 }
