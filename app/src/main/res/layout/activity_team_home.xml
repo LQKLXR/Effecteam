@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".team.home.TeamHomeActivity">
 
+    <com.xuexiang.xui.widget.actionbar.TitleBar
+        android:id="@+id/team_home_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tb_actionPadding="20dp"
+        app:tb_centerGravity="center"
+        app:tb_titleText="测试小组"
+        app:tb_titleTextSize="@dimen/textSize15"
+        app:tb_useThemeColor="true"
+        />
 
+    <com.xuexiang.xui.widget.tabbar.EasyIndicator
+        android:id="@+id/team_home_easy_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/team_home_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".common.calendar.CalenderActivity">
+
+    <com.xuexiang.xui.widget.actionbar.TitleBar
+        android:id="@+id/calendar_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tb_actionPadding="20dp"
+        app:tb_centerGravity="center"
+        app:tb_titleText="选择日期"
+        app:tb_titleTextSize="@dimen/textSize15"
+        app:tb_useThemeColor="true"
+        />
+
+
+    <com.haibin.calendarview.CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        app:calendar_height="50dp"
+        app:current_month_text_color="#333333"
+        app:current_month_lunar_text_color="#CFCFCF"
+        app:min_year="2004"
+        app:other_month_text_color="#e1e1e1"
+        app:scheme_text="假"
+        app:selected_text_color="#fff"
+        app:selected_theme_color="@color/colorPrimary"
+        app:week_start_with="mon"
+        app:week_background="#fff"
+        app:week_text_color="#111" />
+
+
+
+</LinearLayout>

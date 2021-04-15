@@ -11,4 +11,33 @@
 
     <color name="WHITE">#FFFFFF</color>
     <color name="BLACK">#000000</color>
+
+    <dimen name="teamInfoHeight">60dp</dimen>
+    <dimen name="textSize15">15sp</dimen>
+
+    <!--项目界面的弹窗式菜单-->
+    <string name="projectAlertMenuTitle">项目菜单</string>
+    <string-array name="projectAlertMenuContent">
+        <item>查看项目</item>
+        <item>修改项目</item>
+        <item>归档项目</item>
+        <item>删除项目</item>
+    </string-array>
+    <string name="projectCompleteAlertMenuTitle">确定归档该项目吗？</string>
+    <string name="projectDeleteAlertMenuTitle">确定删除该项目吗？</string>
+    <string name="Yes">确定</string>
+    <string name="No">取消</string>
+
+
+    <string name="taskAlertMenuTitle">任务菜单</string>
+    <string-array name="taskAlertMenuContent">
+        <item>查看任务</item>
+        <item>修改任务</item>
+        <item>完成任务</item>
+        <item>删除任务</item>
+    </string-array>
+    <string name="taskCompleteAlertMenuTitle">确定完成该任务吗？</string>
+    <string name="taskDeleteAlertMenuTitle">确定删除该任务吗？</string>
+
+
 </resources>

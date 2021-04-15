@@ -1,39 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
+    <com.xuexiang.xui.widget.actionbar.TitleBar
+        android:id="@+id/team_list_title_bar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp">
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:text="团队列表"
-            android:textSize="15sp"
-            android:gravity="center"
-            android:textColor="@color/BLACK"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"/>
-
-        <ImageButton
-            android:id="@+id/team_list_add_button"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="#FFFFFF"
-            android:src="@drawable/drawable_contacts_button_add"
-            android:scaleType="fitCenter"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="5dp"/>
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        app:tb_actionPadding="20dp"
+        app:tb_centerGravity="center"
+        app:tb_titleText="团队列表"
+        app:tb_titleTextSize="@dimen/textSize15"
+        app:tb_useThemeColor="true"
+        />
 
     <SearchView
         android:id="@+id/team_list_search"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:queryHint="搜索团队名称"
         android:layout_marginTop="5dp"
         android:iconifiedByDefault="false"></SearchView>

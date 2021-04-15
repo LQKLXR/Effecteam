@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.SearchView;
 
@@ -17,11 +18,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.team.TeamVirtualData;
 import com.lqk.effecteam.team.create.CreateTeamActivity;
 import com.lqk.effecteam.team.join.JoinTeamActivity;
+import com.xuexiang.xui.adapter.simple.AdapterItem;
+import com.xuexiang.xui.adapter.simple.XUISimpleAdapter;
+import com.xuexiang.xui.widget.actionbar.TitleBar;
+import com.xuexiang.xui.widget.popupwindow.popup.XUISimplePopup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,12 +37,12 @@ import java.util.List;
  * Describe: 团队界面的列表
  */
 public class TeamFragment extends Fragment {
-    /*右上角添加菜单按钮*/
-    private ImageButton mAddButton;
+    /*标题栏*/
+    private TitleBar mTitleBar;
     /*搜索框*/
     private SearchView mSearchView;
     /*弹出式菜单*/
-    private PopupMenu mPopupMenu;
+    private XUISimplePopup mXUISimplePopup;
     /*循环视图显示团队*/
     private RecyclerView mRecyclerView;
     /*Adapter*/
@@ -44,25 +50,7 @@ public class TeamFragment extends Fragment {
     /*要显示的团队列表*/
     private List<Team> mTeamList;
 
-    private PopupMenu.OnMenuItemClickListener onMenuItemClickListener = new PopupMenu.OnMenuItemClickListener() {
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            Intent intent = null;
-            switch (item.getItemId()){
-                case R.id.team_list_join_team_menu:
-                    /*点击了加入团队的菜单项，进入加入团队页面*/
-                    intent = new Intent(getActivity(), JoinTeamActivity.class);
-                    startActivity(intent);
-                    break;
-                case R.id.team_list_create_team_menu:
-                    /*点击了创建团队的菜单项，进入创建团队页面 */
-                    intent = new Intent(getActivity(), CreateTeamActivity.class);
-                    startActivity(intent);
-                    break;
-            }
-            return false;
-        }
-    };
+    public static final int BACK_TO_TEAM_REQUEST = 3;
 
     @Nullable
     @Override
@@ -72,19 +60,40 @@ public class TeamFragment extends Fragment {
         return view;
     }
 
-
     /**
      * 初始化各个组件
      * @param view
      */
     private void initView(View view){
-        mAddButton = view.findViewById(R.id.team_list_add_button);
+        mTitleBar = view.findViewById(R.id.team_list_title_bar);
+        mTitleBar.disableLeftView();
+        mTitleBar.addAction(new TitleBar.TextAction("添加") {
+            @Override
+            public void performAction(View view) {
+                mXUISimplePopup.showDown(view);
+            }
+        });
         mSearchView = view.findViewById(R.id.team_list_search);
         mRecyclerView = view.findViewById(R.id.team_list_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mXUISimplePopup = new XUISimplePopup(getContext(), new AdapterItem[]{new AdapterItem("搜索团队"), new AdapterItem("创建团队")}).create((adapter, item, position) -> {
+            Intent intent = null;
+            switch (position){
+                case 0:
+                    /*点击了加入团队的菜单项，进入加入团队页面*/
+                    intent = new Intent(getActivity(), JoinTeamActivity.class);
+                    startActivity(intent);
+                    break;
+                case 1:
+                    /*点击了创建团队的菜单项，进入创建团队页面 */
+                    intent = new Intent(getActivity(), CreateTeamActivity.class);
+                    startActivityForResult(intent, BACK_TO_TEAM_REQUEST);
+                    break;
+            }
+        });
         /* TODO 是模拟的虚假数据 */
         mTeamList = TeamVirtualData.teamArrayList;
-        mTeamAdapter = new TeamAdapter(mTeamList);
+        mTeamAdapter = new TeamAdapter(mTeamList, getActivity());
         /* 添加分割线 */
         mRecyclerView.setAdapter(mTeamAdapter);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),1));
@@ -97,21 +106,6 @@ public class TeamFragment extends Fragment {
      * 添加监听器
      */
     private void addListener(){
-        /*添加按钮增加监听器*/
-        mAddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                /*创建一个弹出式菜单*/
-                mPopupMenu = new PopupMenu(getActivity(), mAddButton);
-                /*注入菜单内容*/
-                mPopupMenu.inflate(R.menu.team_list_add_menu);
-                /*绑定监听器*/
-                mPopupMenu.setOnMenuItemClickListener(onMenuItemClickListener);
-                /*显示出来*/
-                mPopupMenu.show();
-            }
-        });
-
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

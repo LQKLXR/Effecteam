@@ -2,8 +2,6 @@ package com.lqk.effecteam.team.join;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.SearchView;
 
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -12,20 +10,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
-import com.lqk.effecteam.main.MainActivity;
 import com.lqk.effecteam.team.TeamVirtualData;
 import com.lqk.effecteam.team.list.Team;
+import com.xuexiang.xui.widget.actionbar.TitleBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 加入一个队伍的Activity
+ */
 public class JoinTeamActivity extends BaseActivity {
 
-    private ImageButton mBackButton;
+    private TitleBar mTitleBar;
     private SearchView mSearchView;
     private RecyclerView mRecyclerView;
     private JoinTeamAdapter mJoinTeamAdapter;
     private List<Team> mTeamList;
+
+    public static final int BACK_TO_TEAM_RESULT = 3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,7 @@ public class JoinTeamActivity extends BaseActivity {
     }
 
     private void initView(){
-        mBackButton = findViewById(R.id.join_team_back_button);
+        mTitleBar = findViewById(R.id.join_team_title_bar);
         mSearchView = findViewById(R.id.join_team_search);
         mRecyclerView = findViewById(R.id.join_team_recyclerview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(JoinTeamActivity.this);
@@ -49,13 +53,10 @@ public class JoinTeamActivity extends BaseActivity {
     }
 
     private void addListener(){
-        mBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(JoinTeamActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        mTitleBar.setLeftClickListener(v -> {
+            Intent intent = new Intent();
+            setResult(BACK_TO_TEAM_RESULT);
+            finish();
         });
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

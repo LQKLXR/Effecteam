@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -17,12 +16,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.HttpUtil;
-import com.lqk.effecteam.main.MainActivity;
+import com.lqk.effecteam.MainActivity;
 
 import java.io.IOException;
 

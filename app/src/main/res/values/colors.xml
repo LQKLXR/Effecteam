@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3959D8</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#3959D8</color>
+    <color name="colorPrimary">#66ccff</color>
+    <color name="colorAccent">#66ccff</color>
 
     <color name="softPrimary">#66ccff</color>
+    
+    <color name="projectUrgent1">#FF6347</color>
+    <color name="projectUrgent2">#FFC125</color>
+    <color name="projectUrgent3">#66ccff</color>
 </resources>

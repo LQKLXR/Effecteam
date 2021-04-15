@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--需要设置RightTextString和点击监听器-->
+    <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+        android:id="@+id/team_home_info_team_name"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:background="@color/colorAccent"
+        app:sDividerLineType="both"
+        app:sLeftTextString="团队名称"
+        android:layout_marginTop="5dp"/>
+
+    <!--需要设置RightTextString和点击监听器-->
+    <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+        android:id="@+id/team_home_info_team_number"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/teamInfoHeight"
+        android:layout_gravity="center"
+        android:background="@color/colorAccent"
+        app:sDividerLineType="both"
+        app:sLeftTextString="团队号码" />
+
+    <!--需要设置RightTextString和点击监听器-->
+    <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+        android:id="@+id/team_home_info_team_organization"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/teamInfoHeight"
+        android:layout_gravity="center"
+        android:background="@color/colorAccent"
+        app:sDividerLineType="both"
+        app:sLeftTextString="团队机构" />
+
+    <!--需要设置RightTextString-->
+    <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+        android:id="@+id/team_home_info_team_owner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/teamInfoHeight"
+        android:layout_gravity="center"
+        android:background="@color/colorAccent"
+        app:sDividerLineType="both"
+        app:sLeftTextString="团队创建人" />
+
+    <!--需要设置RightTextString-->
+    <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+        android:id="@+id/team_home_info_team_create_time"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/teamInfoHeight"
+        android:layout_gravity="center"
+        android:background="@color/colorAccent"
+        app:sDividerLineType="both"
+        app:sLeftTextString="创建时间" />
+
+    <!--需要设置RightTextString和点击监听器-->
+    <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+        android:id="@+id/team_home_info_team_people"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/teamInfoHeight"
+        app:sDividerLineType="both"
+        app:sLeftTextString="团队成员"
+        app:sRightIconRes="@drawable/draw_arrow_right"
+        app:sRightViewMarginRight="10dp" />
+
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.lqk.effecteam.team.list;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.team.TeamVirtualData;
+import com.lqk.effecteam.team.home.TeamHomeActivity;
 import com.lqk.effecteam.team.join.JoinTeamAdapter;
 
 import java.util.ArrayList;
@@ -25,9 +27,12 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
 
     /* 要显示的团队列表 */
     private List<Team> teamList;
+    /* 当前的Activity */
+    private Activity activity;
 
-    public TeamAdapter(List<Team> teamList) {
+    public TeamAdapter(List<Team> teamList, Activity activity) {
         this.teamList = teamList;
+        this.activity = activity;
     }
 
     @NonNull
@@ -85,21 +90,12 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-
-
+                    Intent intent = new Intent(v.getContext(), TeamHomeActivity.class);
+                    // TODO 把团队的信息传到团队界面
+                    activity.startActivity(intent);
                 }
             });
         }
     }
 
-    /*private OnTeamItemClickListener onTeamItemClickListener;
-
-    public interface OnTeamItemClickListener{
-        void onTeamClick(int position);
-    }
-
-    public void setOnTeamItemClickListener(OnTeamItemClickListener onTeamItemClickListener){
-        this.onTeamItemClickListener = onTeamItemClickListener;
-    }*/
 }

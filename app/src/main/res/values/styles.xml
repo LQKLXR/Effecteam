@@ -3,11 +3,17 @@
     <style name="AppTheme" parent="XUITheme.Phone">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowFullscreen">true</item>
+        <!--<item name="android:windowFullscreen">true</item>-->
         <item name="windowNoTitle">true</item>
-        <item name="android:colorBackground">@color/WHITE</item>
+        <item name="xui_config_color_background">@color/WHITE</item>
     </style>
 
+    <style name="TextStyle.Calendar">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/xui_config_color_content_text</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>

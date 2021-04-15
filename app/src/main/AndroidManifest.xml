@@ -15,8 +15,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:strict="">
-        <activity android:name=".team.home.TeamHomeActivity"></activity>
-        <activity android:name=".team.chat.TeamChatActivity" />
+        <activity android:name=".common.calendar.CalenderActivity"></activity>
+        <activity android:name=".task.create.PickActivity" />
+        <activity android:name=".task.create.TaskCreateActivity" />
+        <activity android:name=".project.home.ProjectHomeActivity" />
+        <activity android:name=".team.member.TeamMemberListActivity" />
+        <activity android:name=".team.home.TeamHomeActivity" />
         <activity android:name=".team.join.JoinTeamActivity" />
         <activity android:name=".team.create.CreateTeamActivity" />
         <activity android:name=".account.AccountActivity">
@@ -26,7 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
