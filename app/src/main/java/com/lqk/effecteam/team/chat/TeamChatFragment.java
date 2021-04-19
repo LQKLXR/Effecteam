@@ -1,6 +1,8 @@
 package com.lqk.effecteam.team.chat;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.team.TeamVirtualData;
+import com.xuexiang.xui.widget.textview.supertextview.SuperButton;
 
 import java.util.List;
 
@@ -30,7 +33,7 @@ public class TeamChatFragment extends Fragment {
     /* 消息的编辑框 */
     private EditText mEditText;
     /* 消息的发送按钮 */
-    private Button mSendButton;
+    private SuperButton mSendButton;
     /* 消息数据 */
     private List<Message> mMessageList;
 
@@ -55,5 +58,32 @@ public class TeamChatFragment extends Fragment {
         mTeamChatAdapter = new TeamChatAdapter(mMessageList);
         mRecyclerView.setAdapter(mTeamChatAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.scrollToPosition(TeamVirtualData.messageArrayList.size() - 1);
+
+        addListener(view);
+    }
+
+    private void addListener(View view) {
+        mEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() > 0){
+                    mSendButton.setClickable(true);
+                }
+                else {
+                    mSendButton.setClickable(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 }

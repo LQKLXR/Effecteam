@@ -1,5 +1,6 @@
 package com.lqk.effecteam.team.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lqk.effecteam.R;
+import com.lqk.effecteam.project.create.ProjectCreateActivity;
 import com.lqk.effecteam.project.ProjectVirtualData;
 import com.lqk.effecteam.project.list.Project;
 import com.lqk.effecteam.project.list.ProjectAdapter;
@@ -30,6 +33,9 @@ public class TeamHomeProjectFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private ProjectAdapter mProjectAdapter;
     private List<Project> mProjectList;
+
+    /*悬浮按钮*/
+    private FloatingActionButton mFloatingActionButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,5 +66,12 @@ public class TeamHomeProjectFragment extends Fragment {
         mProjectAdapter = new ProjectAdapter(mProjectList, getActivity());
         mRecyclerView.setAdapter(mProjectAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        mFloatingActionButton = view.findViewById(R.id.project_float_button);
+        mFloatingActionButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), ProjectCreateActivity.class);
+            //TODO 携带项目唯一标识进去
+            startActivity(intent);
+        });
     }
 }

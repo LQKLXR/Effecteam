@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.team.list.Team;
+import com.xuexiang.xui.widget.textview.supertextview.SuperButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,7 @@ public class JoinTeamAdapter extends RecyclerView.Adapter<JoinTeamAdapter.JoinTe
         private TextView mTeamOwner;
         private TextView mTeamOrganization;
         private TextView mTeamCount;
-        private Button mRequestButton;
+        private SuperButton mRequestButton;
 
         public JoinTeamViewHolder(@NonNull View itemView) {
             super(itemView);

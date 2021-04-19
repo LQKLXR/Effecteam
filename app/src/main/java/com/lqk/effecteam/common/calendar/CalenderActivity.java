@@ -47,6 +47,8 @@ public class CalenderActivity extends BaseActivity {
             }
         });
         calendarView = findViewById(R.id.calendarView);
+        dateString = calendarView.getCurYear()+ "年" + calendarView.getCurMonth() + "月" + calendarView.getCurDay() + "日";
+        titleBar.setTitle(dateString);
         calendarView.setOnCalendarSelectListener(new CalendarView.OnCalendarSelectListener() {
             @Override
             public void onCalendarOutOfRange(Calendar calendar) {

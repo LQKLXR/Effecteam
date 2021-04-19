@@ -1,8 +1,10 @@
 package com.lqk.effecteam.project;
 
+import com.lqk.effecteam.project.dynamic.Dynamic;
 import com.lqk.effecteam.project.list.Project;
 import com.lqk.effecteam.task.Task;
 
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +20,10 @@ public class ProjectVirtualData {
     public static List<Project> projectList;
 
     public static List<Task> taskList;
+
+    public static List<Dynamic> dynamicList;
+
+    public static List<File> fileList;
 
     static {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -67,6 +73,31 @@ public class ProjectVirtualData {
         }
 
     }
+
+    static {
+        dynamicList = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            Date date11 = sdf.parse("2021-03-03 14:55:20");
+            Date date21 = sdf.parse("2021-03-04 15:33:22");
+            Date date31 = sdf.parse("2021-03-05 16:22:11");
+            Date date41 = sdf.parse("2021-03-06 14:55:20");
+            Date date51 = sdf.parse("2021-03-07 15:33:22");
+
+            dynamicList.add(new Dynamic(0,0,"上传了","文档1",date11));
+            dynamicList.add(new Dynamic(0,0,"完成了","任务1",date21));
+            dynamicList.add(new Dynamic(0,0,"上传了","文档2",date31));
+            dynamicList.add(new Dynamic(0,0,"上传了","文档3",date41));
+            dynamicList.add(new Dynamic(0,0,"上传了","文档4",date51));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
 
 
 }

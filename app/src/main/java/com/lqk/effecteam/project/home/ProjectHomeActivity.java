@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
 import com.lqk.effecteam.MainActivity;
+import com.lqk.effecteam.project.dynamic.DynamicsFragment;
 import com.lqk.effecteam.task.list.TaskFragment;
 import com.xuexiang.xui.adapter.FragmentAdapter;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
@@ -27,7 +28,7 @@ public class ProjectHomeActivity extends BaseActivity {
     private ViewPager mViewPager;
 
     private TaskFragment mTaskFragment;
-    private ProjectDynamicsFragment mProjectDynamicsFragment;
+    private DynamicsFragment mDynamicsFragment;
     private ProjectHomeDataFragment mProjectHomeDataFragment;
 
     @Override
@@ -46,10 +47,10 @@ public class ProjectHomeActivity extends BaseActivity {
         mEasyIndicator.setTabTitles(titles);
         List<Fragment> fragmentList = new ArrayList<>();
         mTaskFragment = new TaskFragment();
-        mProjectDynamicsFragment = new ProjectDynamicsFragment();
+        mDynamicsFragment = new DynamicsFragment();
         mProjectHomeDataFragment = new ProjectHomeDataFragment();
         fragmentList.add(mTaskFragment);
-        fragmentList.add(mProjectDynamicsFragment);
+        fragmentList.add(mDynamicsFragment);
         fragmentList.add(mProjectHomeDataFragment);
         mEasyIndicator.setViewPager(mViewPager, new FragmentAdapter<>(getSupportFragmentManager(), fragmentList));
 

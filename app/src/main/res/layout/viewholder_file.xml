@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_marginTop="5dp">
+
+    <ImageView
+        android:id="@+id/viewholder_file_icon"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/icon_file_word"
+        />
+
+    <TextView
+        android:id="@+id/viewholder_file_name"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/textSize15"
+        android:text="测试文件"
+        android:textColor="@color/BLACK"
+        />
+
+</LinearLayout>

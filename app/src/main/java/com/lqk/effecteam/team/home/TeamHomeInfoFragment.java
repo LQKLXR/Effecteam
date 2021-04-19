@@ -57,7 +57,6 @@ public class TeamHomeInfoFragment extends Fragment {
         mTeamNumber.setRightString("测试的号码");
         mTeamOrganization.setRightString("测试的机构");
         mTeamOwner.setRightString("测试拥有者");
-        TimeZone.setDefault(TimeZone.getTimeZone("GMT+8"));
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date(System.currentTimeMillis());
         mTeamCreateTime.setRightString(simpleDateFormat.format(date));

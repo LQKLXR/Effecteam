@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".project.create.ProjectCreateActivity">
+
+
+    <com.xuexiang.xui.widget.actionbar.TitleBar
+        android:id="@+id/project_create_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tb_actionPadding="20dp"
+        app:tb_centerGravity="center"
+        app:tb_titleText="新建项目"
+        app:tb_titleTextSize="@dimen/textSize15"
+        app:tb_useThemeColor="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/BLACK"
+        android:textSize="@dimen/textSize15"
+        android:text="项目名称" />
+
+    <com.xuexiang.xui.widget.edittext.MultiLineEditText
+        android:id="@+id/project_create_project_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_rectangle_textview"
+        app:mlet_maxCount="15"
+        app:mlet_hintText="请输入项目名称"
+        app:mlet_showSurplusNumber="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/BLACK"
+        android:textSize="@dimen/textSize15"
+        android:text="项目介绍" />
+
+    <com.xuexiang.xui.widget.edittext.MultiLineEditText
+        android:id="@+id/project_create_project_content"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_rectangle_textview"
+        app:mlet_maxCount="200"
+        app:mlet_hintText="请输入项目内容"
+        app:mlet_showSurplusNumber="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/BLACK"
+        android:textSize="@dimen/textSize15"
+        android:text="选择截止日期" />
+
+    <com.xuexiang.xui.widget.button.roundbutton.RoundButton
+        android:id="@+id/project_create_max_date_button"
+        style="@style/RoundButton.Auto"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:text="-选择日期-" />
+
+</LinearLayout>

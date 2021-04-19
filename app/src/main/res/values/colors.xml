@@ -8,4 +8,9 @@
     <color name="projectUrgent1">#FF6347</color>
     <color name="projectUrgent2">#FFC125</color>
     <color name="projectUrgent3">#66ccff</color>
+
+
+    <string name="dynamicUser">#ff0000</string>
+    <string name="dynamicAction">#000000</string>
+    <string name="dynamicObject">#ff0000</string>
 </resources>

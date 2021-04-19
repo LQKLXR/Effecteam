@@ -62,14 +62,14 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
         long leftTime = projectList.get(position).getMaxDate().getTime() - System.currentTimeMillis();
         int leftDay = (int) (leftTime / (24 * 60 * 60 * 1000));
         if (leftDay >= 30) {
-            holder.mProjectName.setBackgroundColor(Color.parseColor("#66CCFF"));
-            holder.mProjectButton.setBackgroundColor(Color.parseColor("#66CCFF"));
+            holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent3));
+            holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent3));
         } else if (leftDay >= 10) {
-            holder.mProjectName.setBackgroundColor(Color.parseColor("#FFC125"));
-            holder.mProjectButton.setBackgroundColor(Color.parseColor("#FFC125"));
+            holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent2));
+            holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent2));
         } else {
-            holder.mProjectName.setBackgroundColor(Color.parseColor("#FF6347"));
-            holder.mProjectButton.setBackgroundColor(Color.parseColor("#FF6347"));
+            holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent1));
+            holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent1));
         }
         holder.projectId = projectList.get(position).getId();
     }

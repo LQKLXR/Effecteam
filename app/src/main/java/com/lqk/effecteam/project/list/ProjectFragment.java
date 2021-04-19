@@ -31,6 +31,8 @@ public class ProjectFragment extends Fragment {
     private List<Project> mProjectList;
 
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,11 +53,14 @@ public class ProjectFragment extends Fragment {
         mCompleteSpinner.setItems("进行中","已完成","全部");
         mTeamTimeSpinner.setItems("队伍名称","截止时间","创建时间");
         mRecyclerView = view.findViewById(R.id.project_list_recyclerview);
+
         /* TODO 虚拟数据 */
         mProjectList = ProjectVirtualData.projectList;
         mProjectAdapter = new ProjectAdapter(mProjectList, getActivity());
         mRecyclerView.setAdapter(mProjectAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
     }
 
 }

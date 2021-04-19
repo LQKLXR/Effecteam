@@ -64,7 +64,7 @@
         android:layout_height="@dimen/teamInfoHeight"
         app:sDividerLineType="both"
         app:sLeftTextString="团队成员"
-        app:sRightIconRes="@drawable/draw_arrow_right"
+        app:sRightIconRes="@drawable/icon_arrow_right"
         app:sRightViewMarginRight="10dp" />
 
 

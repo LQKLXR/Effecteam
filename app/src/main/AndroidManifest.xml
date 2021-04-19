@@ -15,7 +15,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:strict="">
-        <activity android:name=".common.calendar.CalenderActivity"></activity>
+        <activity android:name=".mine.download.MineDownLoadActivity"></activity>
+        <activity android:name=".mine.dynamic.MineDynamicActivity" />
+        <activity android:name=".mine.task.MineTaskActivity" />
+        <activity android:name=".project.create.ProjectCreateActivity" />
+        <activity android:name=".common.calendar.CalenderActivity" />
         <activity android:name=".task.create.PickActivity" />
         <activity android:name=".task.create.TaskCreateActivity" />
         <activity android:name=".project.home.ProjectHomeActivity" />

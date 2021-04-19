@@ -1,10 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".home.HomeFragment">
 
-    
+    <com.xuexiang.xui.widget.actionbar.TitleBar
+        android:id="@+id/home_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tb_actionPadding="20dp"
+        app:tb_centerGravity="center"
+        app:tb_titleText="首页"
+        app:tb_titleTextSize="@dimen/textSize15"
+        app:tb_useThemeColor="true"
+        />
 
-</FrameLayout>
+    <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+        android:id="@+id/home_team_assistant"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:sCenterViewGravity="left_center"
+        app:sDividerLineType="both"
+        app:sLeftIconRes="@drawable/drawable_icon_team_assistant"
+        app:sLeftTopTextString="团队管理助手"
+        app:sLeftViewGravity="left_center"
+        app:sRightIconRes="@drawable/icon_arrow_right"
+        />
+
+
+    <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+        android:id="@+id/home_task_assistant"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:sCenterViewGravity="left_center"
+        app:sDividerLineType="both"
+        app:sLeftIconRes="@drawable/drawable_icon_task_assistant"
+        app:sLeftTopTextString="任务助手"
+        app:sLeftViewGravity="left_center"
+        app:sRightIconRes="@drawable/icon_arrow_right"
+        />
+
+    <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+        android:id="@+id/home_todo_assistant"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:sCenterViewGravity="left_center"
+        app:sDividerLineType="both"
+        app:sLeftIconRes="@drawable/drawable_icon_todo_assistant"
+        app:sLeftTopTextString="待办助手"
+        app:sLeftViewGravity="left_center"
+        app:sRightIconRes="@drawable/icon_arrow_right"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="团队聊天列表显示区"
+        android:gravity="center"/>
+
+
+
+
+</LinearLayout>

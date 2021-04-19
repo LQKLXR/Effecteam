@@ -14,6 +14,7 @@
 
     <dimen name="teamInfoHeight">60dp</dimen>
     <dimen name="textSize15">15sp</dimen>
+    <dimen name="titleBarHeight">40dp</dimen><!--暂未用到-->
 
     <!--项目界面的弹窗式菜单-->
     <string name="projectAlertMenuTitle">项目菜单</string>
@@ -28,7 +29,7 @@
     <string name="Yes">确定</string>
     <string name="No">取消</string>
 
-
+    <!--任务界面的弹窗式菜单-->
     <string name="taskAlertMenuTitle">任务菜单</string>
     <string-array name="taskAlertMenuContent">
         <item>查看任务</item>

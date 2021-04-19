@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/drawable_person_background">
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="个人中心"
+        android:textSize="@dimen/textSize15"
+        android:gravity="center"
+        android:textColor="@color/WHITE"/>
+    
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="160dp"
+        android:text="我的服务"
+        android:gravity="center"
+        android:textSize="@dimen/textSize15"
+        android:textColor="#000000"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.xuexiang.xui.widget.button.shadowbutton.ShadowButton
+                android:id="@+id/mine_todo_button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                app:sb_shape_type="round"
+
+                android:background="@drawable/icon_my_todo"
+                app:sb_color_unpressed="@color/colorPrimary"
+                app:sb_color_pressed="@color/WHITE"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <com.xuexiang.xui.widget.button.shadowbutton.ShadowButton
+                android:id="@+id/mine_task_button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                app:sb_shape_type="round"
+                app:sb_color_unpressed="@color/colorPrimary"
+                app:sb_color_pressed="@color/WHITE"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <com.xuexiang.xui.widget.button.shadowbutton.ShadowButton
+                android:id="@+id/mine_dynamic_button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                app:sb_shape_type="round"
+                app:sb_color_unpressed="@color/colorPrimary"
+                app:sb_color_pressed="@color/WHITE"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <com.xuexiang.xui.widget.button.shadowbutton.ShadowButton
+                android:id="@+id/mine_download_button"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                app:sb_shape_type="round"
+                app:sb_color_unpressed="@color/colorPrimary"
+                app:sb_color_pressed="@color/WHITE"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="215dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <!--<com.xuexiang.xui.widget.textview.supertextview.SuperButton
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal"
+                android:text="待办事项"
+                android:textSize="@dimen/textSize15"
+                android:textColor="@color/xui_config_color_white"
+                android:background="@drawable/drawable_icon_back_white"
+                app:sCornersRadius="20dp"
+                app:sSolidColor="@color/colorAccent"
+                app:sStrokeColor="@color/colorAccent"
+                app:sStrokeWidth="0.5dp" />-->
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/icon_my_todo"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/icon_my_task"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/icon_my_dynamic"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:background="@drawable/icon_my_download"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/textSize15"
+            android:text="待办事项"
+            android:gravity="center"
+            android:textColor="@color/BLACK"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/textSize15"
+            android:text="我的任务"
+            android:gravity="center"
+            android:textColor="@color/BLACK"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/textSize15"
+            android:text="我的动态"
+            android:gravity="center"
+            android:textColor="@color/BLACK"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="@dimen/textSize15"
+            android:text="我的下载"
+            android:gravity="center"
+            android:textColor="@color/BLACK"/>
+    </LinearLayout>
+
+
+    <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="320dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:sLeftTextString="主题设置"
+        app:sRightIconRes="@drawable/icon_arrow_right"/>
+
+    <com.xuexiang.xui.widget.textview.supertextview.SuperButton
+        android:id="@+id/mine_logout_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
+        app:sSolidColor="@color/projectUrgent1"
+        app:sCornersRadius="10dp"
+        android:text="退出登录" />
+
+</RelativeLayout>
