@@ -19,6 +19,7 @@ import com.lqk.effecteam.R;
 import com.lqk.effecteam.team.TeamVirtualData;
 import com.xuexiang.xui.widget.textview.supertextview.SuperButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -53,12 +54,10 @@ public class TeamChatFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.team_chat_recyclerview);
         mEditText = view.findViewById(R.id.team_chat_edit_text);
         mSendButton = view.findViewById(R.id.team_chat_send_button);
-        /* TODO 虚拟数据 */
-       // mMessageList = TeamVirtualData.messageArrayList;
-        mTeamChatAdapter = new TeamChatAdapter(mMessageList);
+
+        mTeamChatAdapter = new TeamChatAdapter(new ArrayList<>());
         mRecyclerView.setAdapter(mTeamChatAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //mRecyclerView.scrollToPosition(TeamVirtualData.messageArrayList.size() - 1);
 
         addListener(view);
     }
@@ -67,9 +66,7 @@ public class TeamChatFragment extends Fragment {
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() > 0){
@@ -79,10 +76,8 @@ public class TeamChatFragment extends Fragment {
                     mSendButton.setClickable(false);
                 }
             }
-
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
     }

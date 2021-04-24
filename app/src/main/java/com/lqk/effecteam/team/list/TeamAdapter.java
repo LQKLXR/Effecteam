@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * Create By LiuQK on 2021/3/29
- * Describe: 团队列表的Adapter，现在还在模拟数据
+ * Describe: 团队列表的Adapter
  */
 public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder> {
 
@@ -53,6 +53,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
         else {
             holder.mTeamHead.setText(teamName);
         }
+        holder.teamId = teamList.get(position).getId();
 
     }
 
@@ -78,19 +79,18 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
         /*简介*/
         private TextView mTeamInfo;
 
+        private int teamId;
+
         public TeamViewHolder(@NonNull View itemView) {
             super(itemView);
             mTeamHead = itemView.findViewById(R.id.viewholder_team_list_teamhead);
             mTeamName = itemView.findViewById(R.id.viewholder_team_list_teamname);
             mTeamInfo = itemView.findViewById(R.id.viewholder_team_list_teaminfo);
-            /*点击事件*/
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), TeamHomeActivity.class);
-                    // TODO 把团队的信息传到团队界面
-                    activity.startActivity(intent);
-                }
+            /* 点击事件, 进入团队首页 */
+            itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), TeamHomeActivity.class);
+                intent.putExtra("teamId", teamId);
+                activity.startActivity(intent);
             });
         }
     }

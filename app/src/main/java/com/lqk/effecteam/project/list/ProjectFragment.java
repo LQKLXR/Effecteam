@@ -66,8 +66,9 @@ public class ProjectFragment extends Fragment {
                 case 2: //重新加载项目列表
                     mSwipeRefreshLayout.setRefreshing(false);
                     mProjectList = (List<Project>) msg.obj;
-                    mProjectAdapter.setProjectList(mProjectList);
-                    mProjectAdapter.sort();
+                    //mProjectAdapter.setProjectList(mProjectList);
+                    //mProjectAdapter.sort();
+                    selectProjectStatus(mCompleteSpinner.getSelectedIndex());
                     break;
                 case 3: //输出服务端出来的各种异常
                     mSwipeRefreshLayout.setRefreshing(false);
@@ -119,11 +120,8 @@ public class ProjectFragment extends Fragment {
     }
 
     private void addListener(View view) {
-        mCompleteSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
-
-            }
+        mCompleteSpinner.setOnItemSelectedListener((view12, position, id, item) -> {
+            selectProjectStatus(position);
         });
         mTeamTimeSpinner.setOnItemSelectedListener((view1, position, id, item) -> {
             switch (position) {
@@ -153,6 +151,36 @@ public class ProjectFragment extends Fragment {
 
 
     }
+
+    private void selectProjectStatus(int position) {
+
+        List<Project> selectProjects = new ArrayList<>();
+        switch (position) {
+            case 0:
+                for (Project project : mProjectList) {
+                    if (project.getStatus() == 0) {
+                        selectProjects.add(project);
+                    }
+                }
+                mProjectAdapter.setProjectList(selectProjects);
+                mProjectAdapter.sort();
+                break;
+            case 1:
+                for (Project project : mProjectList) {
+                    if (project.getStatus() == 1) {
+                        selectProjects.add(project);
+                    }
+                }
+                mProjectAdapter.setProjectList(selectProjects);
+                mProjectAdapter.sort();
+                break;
+            case 2:
+                mProjectAdapter.setProjectList(mProjectList);
+                mProjectAdapter.sort();
+                break;
+        }
+    }
+
 
     /**
      * 加载新的ProjectList
@@ -190,6 +218,7 @@ public class ProjectFragment extends Fragment {
 
     /**
      * 删除项目
+     *
      * @param projectId
      */
     public void deleteProject(int projectId) {
@@ -229,6 +258,7 @@ public class ProjectFragment extends Fragment {
 
     /**
      * 归档项目
+     *
      * @param projectId
      */
     public void completeProject(int projectId) {

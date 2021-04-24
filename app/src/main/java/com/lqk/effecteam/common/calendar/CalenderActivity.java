@@ -46,8 +46,9 @@ public class CalenderActivity extends BaseActivity {
                 finish();
             }
         });
+
         calendarView = findViewById(R.id.calendarView);
-        dateString = calendarView.getCurYear()+ "年" + calendarView.getCurMonth() + "月" + calendarView.getCurDay() + "日";
+        dateString = calendarView.getCurYear()+ "-" + calendarView.getCurMonth() + "-" + calendarView.getCurDay();
         titleBar.setTitle(dateString);
         calendarView.setOnCalendarSelectListener(new CalendarView.OnCalendarSelectListener() {
             @Override
@@ -58,7 +59,7 @@ public class CalenderActivity extends BaseActivity {
             @Override
             public void onCalendarSelect(Calendar calendar, boolean isClick) {
                 Calendar selectedCalendar = calendarView.getSelectedCalendar();
-                dateString = selectedCalendar.getYear() + "年" + selectedCalendar.getMonth() + "月" + selectedCalendar.getDay() + "日";
+                dateString = calendarView.getCurYear()+ "-" + calendarView.getCurMonth() + "-" + calendarView.getCurDay();
                 titleBar.setTitle(dateString);
             }
         });

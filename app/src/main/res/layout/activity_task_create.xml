@@ -182,7 +182,7 @@
         android:layout_marginRight="20dp"
         android:textColor="@color/BLACK"
         android:textSize="@dimen/textSize15"
-        android:text="参考输入文档" />
+        android:text="参考输入文档(选填)" />
 
     <com.xuexiang.xui.widget.button.roundbutton.RoundButton
         android:id="@+id/task_create_doc_pick_button"

@@ -64,8 +64,37 @@
         android:layout_height="@dimen/teamInfoHeight"
         app:sDividerLineType="both"
         app:sLeftTextString="团队成员"
-        app:sRightIconRes="@drawable/icon_arrow_right"
+        app:sRightIconRes="@drawable/drawable_icon_arrow_right"
         app:sRightViewMarginRight="10dp" />
+
+    <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+        android:id="@+id/team_home_info_team_info"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:sDividerLineType="none"
+        app:sLeftTextString="团队简介"
+        app:sRightIconRes="@drawable/drawable_icon_arrow_right"
+        app:sRightViewMarginRight="0dp" />
+
+    <com.xuexiang.xui.widget.layout.ExpandableLayout
+        android:id="@+id/team_home_info_team_info_expand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/xui_config_color_white"
+        app:el_duration="300"
+        app:el_expanded="false">
+
+        <TextView
+            android:id="@+id/team_home_info_team_info_text"
+            style="@style/TextStyle.Explain"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="8dp"
+            android:singleLine="false"
+            android:textSize="@dimen/textSize15"/>
+
+    </com.xuexiang.xui.widget.layout.ExpandableLayout>
+
 
 
 </LinearLayout>

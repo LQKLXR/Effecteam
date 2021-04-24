@@ -55,14 +55,7 @@ public class TeamHomeProjectFragment extends Fragment {
         mCompleteSpinner.setItems("进行中","已完成","全部");
         mTeamTimeSpinner.setItems("队伍名称","截止时间","创建时间");
         mRecyclerView = view.findViewById(R.id.team_home_project_recyclerview);
-        /* TODO 虚拟数据 */
-        mProjectList = new ArrayList<>();
-        /*for (Project p : ProjectVirtualData.projectList){
-            if(p.getOwnerTeamId() == 1){
-                mProjectList.add(p);
-            }
-        }*/
-        mProjectAdapter = new ProjectAdapter(mProjectList, getActivity(), TeamHomeProjectFragment.this);
+        mProjectAdapter = new ProjectAdapter(new ArrayList<>(), getActivity(), TeamHomeProjectFragment.this);
         mRecyclerView.setAdapter(mProjectAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

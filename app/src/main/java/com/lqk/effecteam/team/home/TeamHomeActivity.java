@@ -61,23 +61,9 @@ public class TeamHomeActivity extends BaseActivity {
         mEasyIndicator.setViewPager(mViewPager, new FragmentAdapter<>(getSupportFragmentManager(), fragmentList));
 
         mTitleBar.setLeftClickListener(v -> {
-            Intent intent = new Intent(TeamHomeActivity.this, MainActivity.class);
-            intent.putExtra("backToTeam", true);
-            startActivity(intent);
             finish();
         });
     }
 
 
-    /**
-     * 判断进入该页面的时候应该进入那个Fragment
-     */
-    @Override
-    protected void onStart() {
-        super.onStart();
-        /*回到团队信息界面*/
-        if (getIntent().getBooleanExtra("BackToInfo", false)) {
-            mViewPager.setCurrentItem(3);
-        }
-    }
 }

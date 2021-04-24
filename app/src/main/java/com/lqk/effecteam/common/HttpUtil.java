@@ -1,15 +1,6 @@
 package com.lqk.effecteam.common;
 
-import android.os.Handler;
-import android.os.StrictMode;
-import android.util.Log;
-import android.widget.Toast;
-
 import androidx.annotation.Nullable;
-
-import com.lqk.effecteam.account.AccountActivity;
-
-import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -17,7 +8,6 @@ import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
 
 /**
  * Create By LiuQK on 2021/3/24
@@ -25,10 +15,9 @@ import okhttp3.Response;
  */
 public class HttpUtil {
 
-    public static String ServerIP = "http://39.108.176.142:8080/";
+    public static String ServerIP = "http://192.168.254.1:8080/";
     public static String Shared_File_Name = "EffecteamValues";
-
-
+    public static final MediaType JSON_TYPE = MediaType.parse("application/json; charset=utf-8");
 
     public static void connectInternet(String urlString, @Nullable RequestBody requestBody, Callback callback){
         new Thread(new Runnable() {

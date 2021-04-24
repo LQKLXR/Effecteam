@@ -13,19 +13,21 @@ public class TeamData {
     private String teamInfo;
     private String institution;
     private Date createTime;
+    private int peopleNumber;
     /* 0表示存在， 1表示解散*/
     private int status;
 
     private int ownerId;
     private String ownerName;
 
-    public TeamData(int id, String number, String name, String teamInfo, String institution, Date createTime, int status, int ownerId, String ownerName) {
+    public TeamData(int id, String number, String name, String teamInfo, String institution, Date createTime, int peopleNumber, int status, int ownerId, String ownerName) {
         this.id = id;
         this.number = number;
         this.name = name;
         this.teamInfo = teamInfo;
         this.institution = institution;
         this.createTime = createTime;
+        this.peopleNumber = peopleNumber;
         this.status = status;
         this.ownerId = ownerId;
         this.ownerName = ownerName;
@@ -77,6 +79,14 @@ public class TeamData {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public int getPeopleNumber() {
+        return peopleNumber;
+    }
+
+    public void setPeopleNumber(int peopleNumber) {
+        this.peopleNumber = peopleNumber;
     }
 
     public int getStatus() {
