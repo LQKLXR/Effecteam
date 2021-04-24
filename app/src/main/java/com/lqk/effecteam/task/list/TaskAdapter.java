@@ -11,12 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
-import com.lqk.effecteam.project.ProjectVirtualData;
-import com.lqk.effecteam.task.Task;
+import com.lqk.effecteam.common.comparator.TaskComparator;
+import com.lqk.effecteam.common.entity.Task;
 import com.xuexiang.xui.widget.button.shadowbutton.ShadowButton;
 import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 
-import java.util.Iterator;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Create By LiuQK on 2021/4/14
@@ -27,9 +29,30 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     private static final String TAG = "TaskAdapter";
 
     private Activity activity;
+    private List<Task> taskList;
 
-    public TaskAdapter(Activity activity) {
+    /*任务排序器*/
+    private TaskComparator taskComparator;
+
+
+
+    public TaskAdapter(Activity activity, List<Task> taskList) {
         this.activity = activity;
+        this.taskList = taskList;
+        taskComparator = new TaskComparator("Priority");
+    }
+
+    public void sortType(String type){
+        taskComparator.setType(type);
+    }
+
+    public void sort(){
+        Collections.sort(taskList, taskComparator);
+        notifyDataSetChanged();
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
     }
 
     @NonNull
@@ -42,21 +65,35 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
-        //TODO
-        holder.mTextView.setText(ProjectVirtualData.taskList.get(position).getName());
-        holder.mTaskId = ProjectVirtualData.taskList.get(position).getId();
+
+        holder.mTaskName.setText(taskList.get(position).getName());
+        holder.mTaskId = taskList.get(position).getId();
+        //任务列表的详细信息
+        StringBuffer stringBuffer = new StringBuffer("优先级: ");
+        if (taskList.get(position).getPriority() == 1) {
+            stringBuffer.append("高  ");
+        } else if (taskList.get(position).getPriority() == 2) {
+            stringBuffer.append("中  ");
+        } else if (taskList.get(position).getPriority() == 3) {
+            stringBuffer.append("低  ");
+        }
+        stringBuffer.append("截止时间: ");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        stringBuffer.append(simpleDateFormat.format(taskList.get(position).getMaxDate()));
+        holder.mTaskInfo.setText(stringBuffer.toString());
+        holder.mTaskId = taskList.get(position).getId();
     }
 
     @Override
     public int getItemCount() {
-        //TODO
-        return ProjectVirtualData.taskList.size();
+        return taskList.size();
     }
 
 
     class TaskViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView mTextView;
+        private TextView mTaskName;
+        private TextView mTaskInfo;
         private ShadowButton mSuperButton;
 
         private int mTaskId;
@@ -67,7 +104,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         }
 
         private void initView(View itemView) {
-            mTextView = itemView.findViewById(R.id.viewholder_task_list_name);
+            mTaskName = itemView.findViewById(R.id.viewholder_task_list_name);
+            mTaskInfo = itemView.findViewById(R.id.viewholder_task_list_info);
             mSuperButton = itemView.findViewById(R.id.viewholder_task_list_button);
 
             mSuperButton.setOnClickListener(v -> {
@@ -89,14 +127,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                                             .onPositive((dialog1, which) -> {
                                                 /*点了确定*/
                                                 // TODO
-                                                Iterator<Task> iterator = ProjectVirtualData.taskList.iterator();
-                                                while (iterator.hasNext()) {
-                                                    Task cur = iterator.next();
-                                                    if(cur.getId() == mTaskId){
-                                                        iterator.remove();
-                                                        break;
-                                                    }
-                                                }
+
                                                 notifyDataSetChanged();
                                                 Log.i(TAG, "正在完成任务: ");
                                             })
@@ -111,14 +142,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                                             .onPositive((dialog1, which) -> {
                                                 /*点了确定*/
                                                 // TODO
-                                                Iterator<Task> iterator = ProjectVirtualData.taskList.iterator();
-                                                while (iterator.hasNext()) {
-                                                    Task cur = iterator.next();
-                                                    if(cur.getId() == mTaskId){
-                                                        iterator.remove();
-                                                        break;
-                                                    }
-                                                }
+
                                                 notifyDataSetChanged();
                                                 Log.i(TAG, "正在删除任务: ");
                                             })

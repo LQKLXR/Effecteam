@@ -6,16 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".project.create.ProjectCreateActivity">
-
+    tools:context=".project.alter.ProjectAlertActivity">
 
     <com.xuexiang.xui.widget.actionbar.TitleBar
-        android:id="@+id/project_create_title_bar"
+        android:id="@+id/project_alert_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tb_actionPadding="20dp"
         app:tb_centerGravity="center"
-        app:tb_titleText="新建项目"
+        app:tb_titleText="修改项目"
         app:tb_titleTextSize="@dimen/textSize15"
         app:tb_useThemeColor="true"
         />
@@ -31,7 +30,7 @@
         android:text="项目名称" />
 
     <com.xuexiang.xui.widget.edittext.MultiLineEditText
-        android:id="@+id/project_create_project_name"
+        android:id="@+id/project_alert_project_name"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
@@ -54,7 +53,7 @@
         android:text="项目介绍" />
 
     <com.xuexiang.xui.widget.edittext.MultiLineEditText
-        android:id="@+id/project_create_project_content"
+        android:id="@+id/project_alert_project_content"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginTop="5dp"
@@ -76,7 +75,7 @@
         android:text="选择截止日期" />
 
     <com.xuexiang.xui.widget.button.roundbutton.RoundButton
-        android:id="@+id/project_create_max_date_button"
+        android:id="@+id/project_alert_max_date_button"
         style="@style/RoundButton.Auto"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"

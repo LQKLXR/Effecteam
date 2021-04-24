@@ -37,8 +37,7 @@ public class DynamicsFragment extends Fragment {
 
     private void initView(View view) {
         mProjectDynamicRecyclerview = view.findViewById(R.id.project_dynamic_recyclerview);
-        mDynamicList = ProjectVirtualData.dynamicList;
-        mDynamicAdapter = new DynamicAdapter(mDynamicList, getActivity());
+        mDynamicAdapter = new DynamicAdapter(new ArrayList<>(), getActivity());
         mProjectDynamicRecyclerview.setAdapter(mDynamicAdapter);
         mProjectDynamicRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         addListener(view);

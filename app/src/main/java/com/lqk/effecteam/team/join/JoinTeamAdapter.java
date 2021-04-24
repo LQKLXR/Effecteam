@@ -3,17 +3,16 @@ package com.lqk.effecteam.team.join;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
-import com.lqk.effecteam.team.list.Team;
+import com.lqk.effecteam.common.entity.Team;
+import com.lqk.effecteam.common.entity.TeamData;
 import com.xuexiang.xui.widget.textview.supertextview.SuperButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,10 +21,13 @@ import java.util.List;
  */
 public class JoinTeamAdapter extends RecyclerView.Adapter<JoinTeamAdapter.JoinTeamViewHolder> {
 
-    private List<Team> teamList;
+    private List<TeamData> teamDataList;
 
-    public JoinTeamAdapter(List<Team> teamList) {
-        this.teamList = teamList;
+    private JoinTeamActivity joinTeamActivity;
+
+    public JoinTeamAdapter(List<TeamData> teamDataList, JoinTeamActivity joinTeamActivity) {
+        this.teamDataList = teamDataList;
+        this.joinTeamActivity = joinTeamActivity;
     }
 
     @NonNull
@@ -38,26 +40,26 @@ public class JoinTeamAdapter extends RecyclerView.Adapter<JoinTeamAdapter.JoinTe
 
     @Override
     public void onBindViewHolder(@NonNull JoinTeamAdapter.JoinTeamViewHolder holder, int position) {
-        /* TODO 模拟数据待修改为真实数据 */
-        holder.mTeamName.setText(teamList.get(position).getTeamName());
-        holder.mTeamOrganization.setText("团队机构: " + teamList.get(position).getTeamOrganization());
-        holder.mTeamOwner.setText("创始人: 测试");
-        holder.mTeamNumber.setText("团队号码: " + teamList.get(position).getTeamNumber());
-        holder.mTeamCount.setText("团队人数: 5人");
+
+        holder.mTeamName.setText(teamDataList.get(position).getName());
+        holder.mTeamNumber.setText("团队号码: " + teamDataList.get(position).getNumber());
+        holder.mTeamOwner.setText("团队拥有者: " + teamDataList.get(position).getOwnerName());
+        holder.mTeamOrganization.setText("所属机构: " + teamDataList.get(position).getInstitution());
+        holder.teamId = teamDataList.get(position).getId();
+
     }
 
     @Override
     public int getItemCount() {
-        /* TODO 模拟数据待修改为真实数据 */
-        return teamList.size();
+        return teamDataList.size();
     }
 
-    public List<Team> getTeamList() {
-        return teamList;
+    public List<TeamData> getTeamDataList() {
+        return teamDataList;
     }
 
-    public void setTeamList(List<Team> teamList) {
-        this.teamList = teamList;
+    public void setTeamDataList(List<TeamData> teamDataList) {
+        this.teamDataList = teamDataList;
     }
 
     class JoinTeamViewHolder extends RecyclerView.ViewHolder{
@@ -66,8 +68,9 @@ public class JoinTeamAdapter extends RecyclerView.Adapter<JoinTeamAdapter.JoinTe
         private TextView mTeamNumber;
         private TextView mTeamOwner;
         private TextView mTeamOrganization;
-        private TextView mTeamCount;
         private SuperButton mRequestButton;
+
+        private int teamId;
 
         public JoinTeamViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,7 +86,6 @@ public class JoinTeamAdapter extends RecyclerView.Adapter<JoinTeamAdapter.JoinTe
             mTeamNumber = view.findViewById(R.id.viewholder_join_team_number);
             mTeamOwner = view.findViewById(R.id.viewholder_join_team_ower);
             mTeamOrganization = view.findViewById(R.id.viewholder_join_team_org);
-            mTeamCount = view.findViewById(R.id.viewholder_join_team_count);
             mRequestButton = view.findViewById(R.id.viewholder_join_team_request_button);
             addListener();
         }
@@ -92,11 +94,11 @@ public class JoinTeamAdapter extends RecyclerView.Adapter<JoinTeamAdapter.JoinTe
          * 绑定监听器
          */
         private void addListener(){
-            /* TODO 添加申请团队的时候的网络接口 */
+
             mRequestButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    joinTeamActivity.applyForTeam(teamId);
                 }
             });
         }

@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".task.create.TaskCreateActivity">
+    tools:context=".account.RegisterActivity">
+
 
     <com.xuexiang.xui.widget.actionbar.TitleBar
-        android:id="@+id/task_create_title_bar"
+        android:id="@+id/register_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tb_actionPadding="20dp"
         app:tb_centerGravity="center"
-        app:tb_titleText="新建任务"
+        app:tb_titleText="注册账号"
         app:tb_titleTextSize="@dimen/textSize15"
         app:tb_useThemeColor="true"
         />
+
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,20 +30,20 @@
         android:layout_marginRight="20dp"
         android:textColor="@color/BLACK"
         android:textSize="@dimen/textSize15"
-        android:text="任务名称" />
+        android:text="真实姓名" />
 
     <com.xuexiang.xui.widget.edittext.MultiLineEditText
-        android:id="@+id/task_create_task_name"
+        android:id="@+id/register_input_actualname"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/shape_rectangle_textview"
-        app:mlet_maxCount="15"
-        app:mlet_hintText="请输入任务名称"
-        app:mlet_showSurplusNumber="true"
-        />
+        app:mlet_maxCount="20"
+        app:mlet_hintText="请输入真实姓名(必填)"
+        app:mlet_showSurplusNumber="true"/>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,18 +53,73 @@
         android:layout_marginRight="20dp"
         android:textColor="@color/BLACK"
         android:textSize="@dimen/textSize15"
-        android:text="任务内容" />
+        android:text="性别" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/BLACK"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/textSize15"
+            android:text="男"
+            android:layout_marginLeft="20dp"/>
+        <com.xuexiang.xui.widget.button.SmoothCheckBox
+            android:id="@+id/register_check_nan"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/BLACK"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/textSize15"
+            android:text="女"
+            android:layout_marginLeft="20dp"/>
+        <com.xuexiang.xui.widget.button.SmoothCheckBox
+            android:id="@+id/register_check_nv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/BLACK"
+        android:textSize="@dimen/textSize15"
+        android:text="邮箱" />
 
     <com.xuexiang.xui.widget.edittext.MultiLineEditText
-        android:id="@+id/task_create_task_content"
+        android:id="@+id/register_input_email"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="40dp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/shape_rectangle_textview"
-        app:mlet_maxCount="200"
-        app:mlet_hintText="请输入任务内容"
+        app:mlet_maxCount="20"
+        app:mlet_hintText="请输入邮箱(必填)"
         app:mlet_showSurplusNumber="true"/>
 
     <TextView
@@ -71,74 +130,19 @@
         android:layout_marginRight="20dp"
         android:textColor="@color/BLACK"
         android:textSize="@dimen/textSize15"
-        android:text="优先级选择" />
+        android:text="密码" />
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/register_input_pswd"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="5dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textColor="@color/BLACK"
-            android:gravity="center_vertical"
-            android:textSize="@dimen/textSize15"
-            android:text="低"
-            android:layout_marginLeft="20dp"/>
-        <com.xuexiang.xui.widget.button.SmoothCheckBox
-            android:id="@+id/task_create_task_priority_low"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_gravity="center_vertical"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="5dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textColor="@color/BLACK"
-            android:gravity="center_vertical"
-            android:textSize="@dimen/textSize15"
-            android:text="中"
-            android:layout_marginLeft="20dp"/>
-        <com.xuexiang.xui.widget.button.SmoothCheckBox
-            android:id="@+id/task_create_task_priority_middle"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_gravity="center_vertical"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="5dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textColor="@color/BLACK"
-            android:gravity="center_vertical"
-            android:textSize="@dimen/textSize15"
-            android:text="高"
-            android:layout_marginLeft="20dp"/>
-        <com.xuexiang.xui.widget.button.SmoothCheckBox
-            android:id="@+id/task_create_task_priority_high"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="20dp"
-            android:layout_gravity="center_vertical"
-            />
-    </LinearLayout>
+        android:background="@drawable/shape_rectangle_textview"
+        android:inputType="textPassword"
+        android:hint="请输入密码"
+        android:maxLength="20"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -148,48 +152,23 @@
         android:layout_marginRight="20dp"
         android:textColor="@color/BLACK"
         android:textSize="@dimen/textSize15"
-        android:text="选择截止日期" />
+        android:text="确认密码" />
 
-    <com.xuexiang.xui.widget.button.roundbutton.RoundButton
-        android:id="@+id/task_create_max_date_button"
-        style="@style/RoundButton.Auto"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:text="-选择日期-" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <EditText
+        android:id="@+id/register_input_pswd_re"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:textColor="@color/BLACK"
-        android:textSize="@dimen/textSize15"
-        android:text="选择参与人员" />
+        android:background="@drawable/shape_rectangle_textview"
+        android:inputType="textPassword"
+        android:hint="请输入确认密码(必填)"
+        android:maxLength="20"/>
 
-    <com.xuexiang.xui.widget.button.roundbutton.RoundButton
-        android:id="@+id/task_create_member_pick_button"
-        style="@style/RoundButton.Auto"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:text="-选择人员-" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textColor="@color/BLACK"
-        android:textSize="@dimen/textSize15"
-        android:text="参考输入文档" />
 
-    <com.xuexiang.xui.widget.button.roundbutton.RoundButton
-        android:id="@+id/task_create_doc_pick_button"
-        style="@style/RoundButton.Auto"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:text="-选择文档-" />
+
 
 
 </LinearLayout>

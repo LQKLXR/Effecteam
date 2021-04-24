@@ -54,11 +54,11 @@ public class TeamChatFragment extends Fragment {
         mEditText = view.findViewById(R.id.team_chat_edit_text);
         mSendButton = view.findViewById(R.id.team_chat_send_button);
         /* TODO 虚拟数据 */
-        mMessageList = TeamVirtualData.messageArrayList;
+       // mMessageList = TeamVirtualData.messageArrayList;
         mTeamChatAdapter = new TeamChatAdapter(mMessageList);
         mRecyclerView.setAdapter(mTeamChatAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mRecyclerView.scrollToPosition(TeamVirtualData.messageArrayList.size() - 1);
+        //mRecyclerView.scrollToPosition(TeamVirtualData.messageArrayList.size() - 1);
 
         addListener(view);
     }

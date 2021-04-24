@@ -1,7 +1,6 @@
 package com.lqk.effecteam.mine.task;
 
 import android.os.Bundle;
-import android.widget.FrameLayout;
 
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
@@ -11,7 +10,6 @@ import com.xuexiang.xui.widget.actionbar.TitleBar;
 public class MineTaskActivity extends BaseActivity {
 
     private TitleBar mTeamHomeTitleBar;
-    //private FrameLayout mMineTaskFragmentLayout;
     private TaskFragment mTaskFragment;
 
     @Override
@@ -24,8 +22,8 @@ public class MineTaskActivity extends BaseActivity {
 
     private void initView() {
         mTeamHomeTitleBar = findViewById(R.id.mine_task_title_bar);
-        //mMineTaskFragmentLayout = findViewById(R.id.mine_task_fragment_layout);
         mTaskFragment = new TaskFragment();
+        mTaskFragment.setType(1);
         addListener();
     }
 

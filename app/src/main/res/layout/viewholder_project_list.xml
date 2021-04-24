@@ -32,15 +32,32 @@
             android:layout_weight="6"
             android:layout_height="match_parent"
             app:rv_type="rectangle">
-            <TextView
-                android:id="@+id/viewholder_project_list_project_name"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:textColor="@color/xui_config_color_white"
-                android:textSize="15sp" />
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/viewholder_project_list_project_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:textColor="@color/xui_config_color_white"
+                    android:textSize="@dimen/textSize15" />
+                <TextView
+                    android:id="@+id/viewholder_project_list_max_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:textColor="@color/xui_config_color_white"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
         </com.xuexiang.xui.widget.button.RippleView>
         <com.xuexiang.xui.widget.button.shadowbutton.ShadowButton
             android:id="@+id/viewholder_project_list_button"
@@ -50,7 +67,7 @@
             android:text="≡"
             android:textColor="@color/xui_config_color_white"
             android:gravity="center"
-            android:textSize="15sp"
+            android:textSize="@dimen/textSize15"
             app:sb_ripple_color="@color/projectUrgent3"/>
     </LinearLayout>
 

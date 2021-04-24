@@ -13,8 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.project.create.ProjectCreateActivity;
-import com.lqk.effecteam.project.ProjectVirtualData;
-import com.lqk.effecteam.project.list.Project;
+import com.lqk.effecteam.common.entity.Project;
 import com.lqk.effecteam.project.list.ProjectAdapter;
 import com.xuexiang.xui.widget.spinner.materialspinner.MaterialSpinner;
 
@@ -58,12 +57,12 @@ public class TeamHomeProjectFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.team_home_project_recyclerview);
         /* TODO 虚拟数据 */
         mProjectList = new ArrayList<>();
-        for (Project p : ProjectVirtualData.projectList){
+        /*for (Project p : ProjectVirtualData.projectList){
             if(p.getOwnerTeamId() == 1){
                 mProjectList.add(p);
             }
-        }
-        mProjectAdapter = new ProjectAdapter(mProjectList, getActivity());
+        }*/
+        mProjectAdapter = new ProjectAdapter(mProjectList, getActivity(), TeamHomeProjectFragment.this);
         mRecyclerView.setAdapter(mProjectAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

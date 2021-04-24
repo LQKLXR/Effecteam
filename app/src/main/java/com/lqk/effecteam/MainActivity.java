@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +22,7 @@ import com.lqk.effecteam.team.chat.TeamChatFragment;
 import com.lqk.effecteam.team.join.JoinTeamActivity;
 import com.lqk.effecteam.team.list.TeamFragment;
 import com.xuexiang.xui.XUI;
+import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 
 /**
  * 主界面的Activity
@@ -44,6 +46,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+
+        Toast.makeText(MainActivity.this, "欢迎 " + getIntent().getStringExtra("actualName"), Toast.LENGTH_SHORT).show();
 
     }
 
@@ -88,8 +92,11 @@ public class MainActivity extends BaseActivity {
             if (resultCode == JoinTeamActivity.BACK_TO_TEAM_RESULT) {
                 fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, mTeamFragment).commit();
             }
+            Toast.makeText(MainActivity.this, data.getStringExtra("toast"), Toast.LENGTH_SHORT).show();
+            mTeamFragment.loadTeamList();
         }
     }
+
 
 
 }

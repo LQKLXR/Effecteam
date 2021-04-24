@@ -36,6 +36,7 @@ public class ProjectHomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_home);
         initView();
+
     }
 
     private void initView() {
@@ -53,21 +54,13 @@ public class ProjectHomeActivity extends BaseActivity {
         fragmentList.add(mDynamicsFragment);
         fragmentList.add(mProjectHomeDataFragment);
         mEasyIndicator.setViewPager(mViewPager, new FragmentAdapter<>(getSupportFragmentManager(), fragmentList));
-
+        mTaskFragment.setType(0);
         mTitleBar.setLeftClickListener(v -> {
-            Intent intent = new Intent(ProjectHomeActivity.this, MainActivity.class);
-            intent.putExtra("backToProject", true);
-            startActivity(intent);
             finish();
         });
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (getIntent().getBooleanExtra("backToTask", false)) {
-            mViewPager.setCurrentItem(0);
-        }
-    }
+
+
 }

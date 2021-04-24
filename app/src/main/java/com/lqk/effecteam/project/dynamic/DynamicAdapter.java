@@ -45,7 +45,7 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DynamicV
         String colorObject = activity.getResources().getString(R.string.dynamicObject);
 
         StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append("<font color='").append(colorUser).append("'>").append(TeamVirtualData.userArrayList.get(dynamicList.get(position).getUserId()).getUserName()).append("</font>");
+        //stringBuffer.append("<font color='").append(colorUser).append("'>").append(TeamVirtualData.userArrayList.get(dynamicList.get(position).getUserId()).getUserName()).append("</font>");
         stringBuffer.append("  <font color='").append(colorAction).append("'>").append(dynamicList.get(position).getAction()).append("</font>");
         stringBuffer.append("  <font color='").append(colorObject).append("'>").append(dynamicList.get(position).getObject()).append("</font>");
         String htmlString = stringBuffer.toString();

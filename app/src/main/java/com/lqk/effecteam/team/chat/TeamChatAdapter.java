@@ -70,16 +70,16 @@ public class TeamChatAdapter extends RecyclerView.Adapter<TeamChatAdapter.TeamCh
         if(mMessageList.get(position).getSenderId() == 0){
             holder.mReceiveLinear.setVisibility(View.GONE);
             holder.mSendContentText.setText(mMessageList.get(position).getContent());
-            String sendUserName = TeamVirtualData.userArrayList.get(mMessageList.get(position).getSenderId()).getUserName();
-            holder.mSendHeadText.setText(sendUserName.substring(sendUserName.length() - 2, sendUserName.length()));
-            holder.mSendNameText.setText(sendUserName);
+            //String sendUserName = TeamVirtualData.userArrayList.get(mMessageList.get(position).getSenderId()).getUserName();
+            //holder.mSendHeadText.setText(sendUserName.substring(sendUserName.length() - 2, sendUserName.length()));
+            //holder.mSendNameText.setText(sendUserName);
         }
         else {
             holder.mSendLinear.setVisibility(View.GONE);
             holder.mReceiveContentText.setText(mMessageList.get(position).getContent());
-            String sendUserName = TeamVirtualData.userArrayList.get(mMessageList.get(position).getSenderId()).getUserName();
-            holder.mReceiveHeadText.setText(sendUserName.substring(sendUserName.length() - 2, sendUserName.length()));
-            holder.mReceiveNameText.setText(sendUserName);
+            //String sendUserName = TeamVirtualData.userArrayList.get(mMessageList.get(position).getSenderId()).getUserName();
+            //holder.mReceiveHeadText.setText(sendUserName.substring(sendUserName.length() - 2, sendUserName.length()));
+            //holder.mReceiveNameText.setText(sendUserName);
         }
     }
 

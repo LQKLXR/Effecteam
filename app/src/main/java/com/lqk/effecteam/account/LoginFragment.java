@@ -1,6 +1,9 @@
 package com.lqk.effecteam.account;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,11 +18,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.SharedPreferencesCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.gson.Gson;
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.HttpUtil;
 import com.lqk.effecteam.MainActivity;
+import com.lqk.effecteam.common.entity.User;
+import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 
 import java.io.IOException;
 
@@ -34,7 +41,7 @@ import okhttp3.Response;
  * Create By LiuQK on 2021/3/23
  * Describe: 登录用到的Fragment
  */
-public class LoginFragment extends Fragment{
+public class LoginFragment extends Fragment {
 
     /*输入的手机号*/
     private EditText mInputPhoneNumber;
@@ -45,15 +52,38 @@ public class LoginFragment extends Fragment{
     /*去注册文字*/
     private TextView mToRegisterText;
 
-    private Handler handler = new Handler(){
+    /*加载转圈*/
+    private MaterialDialog mMaterialDialog;
+
+
+    private Handler handler = new Handler() {
+        @SuppressLint("HandlerLeak")
         @Override
         public void handleMessage(@NonNull Message msg) {
-            switch (msg.what){
-                case 1 :
-                    Toast.makeText(getActivity(), "登录成功", Toast.LENGTH_SHORT).show();
+            switch (msg.what) {
+                case 1:
+                    mMaterialDialog.dismiss();
+                    Toast.makeText(getActivity(), "网络连接失败", Toast.LENGTH_LONG).show();
                     break;
                 case 2:
-                    Toast.makeText(getActivity(), "登录失败", Toast.LENGTH_SHORT).show();
+                    mMaterialDialog.dismiss();
+                    Toast.makeText(getActivity(), "帐号或密码错误", Toast.LENGTH_SHORT).show();
+                    break;
+                case 3:
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(HttpUtil.Shared_File_Name, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    User user = (User) msg.obj;
+                    editor.putInt("userId", user.getId());
+                    editor.putString("actualName", user.getActualName());
+                    editor.putString("gender", user.getGender());
+                    editor.commit();
+
+                    mMaterialDialog.dismiss();
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    intent.putExtra("userId", user.getId());
+                    intent.putExtra("actualName", user.getActualName());
+                    startActivity(intent);
+                    getActivity().finish();
                     break;
             }
         }
@@ -76,83 +106,71 @@ public class LoginFragment extends Fragment{
         mLoginButton = view.findViewById(R.id.login_button);
         mToRegisterText = view.findViewById(R.id.to_register_text);
 
+        mMaterialDialog = new MaterialDialog.Builder(getActivity()).content(R.string.loginDialog)
+                .progress(true, 0)
+                .progressIndeterminateStyle(false).build();
+
         /*点击登录按钮，进入主界面*/
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("登录Fragment", "onClick: 点击了登录");
-                AccountActivity activity = (AccountActivity) getActivity();
-                activity.openLoading();
-                //login(mInputPhoneNumber.getText().toString(), mInputPasswordText.getText().toString());
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-
+                login();
             }
         });
         /*点击去注册文字*/
-        mToRegisterText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RegisterFragment registerFragment = new RegisterFragment();
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_login, registerFragment).commit();
-            }
+        mToRegisterText.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), RegisterActivity.class);
+            startActivityForResult(intent, 1);
         });
         /*在手机号处点击回车键*/
-        mInputPhoneNumber.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN){
-                    mInputPasswordText.requestFocus();
-                    mInputPasswordText.setSelection(mInputPasswordText.getText().length());
-                    return true;
-                }
-                return false;
+        mInputPhoneNumber.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
+                mInputPasswordText.requestFocus();
+                mInputPasswordText.setSelection(mInputPasswordText.getText().length());
+                return true;
             }
+            return false;
         });
 
         return view;
     }
 
     /**
-     * TODO 登录的网络接口处理
-     * @param userName
-     * @param password
+     *
      */
-    private void login(String userName, String password){
-         new Thread(new Runnable() {
+    private void login() {
+        //开启加载进度条
+        mMaterialDialog.show();
+
+        FormBody formBody = new FormBody.Builder().add("email", mInputPhoneNumber.getText().toString())
+                .add("password", mInputPasswordText.getText().toString()).build();
+        HttpUtil.connectInternet("login", formBody, new Callback() {
             @Override
-            public void run() {
-                /*TODO 登录接口*/
-                OkHttpClient okHttpClient = new OkHttpClient();
-                FormBody formBody = new FormBody.Builder().add("inputPhoneNumber", "15207155054").add("inputPassword", "lvxinru521").build();
-                Request request = new Request.Builder().url(HttpUtil.ServerIP + "login").post(formBody).build();
-                Call call = okHttpClient.newCall(request);
-                call.enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        String result = new String(response.body().bytes());
-                        if(result.equals("true")){
-                            Message message = Message.obtain();
-                            message.what = 1;
-                            Log.d("登录Fragment", "onResponse: 登录成功");
-                            handler.sendMessage(message);
-                        }
-                        else{
-                            Message message = Message.obtain();
-                            message.what = 2;
-                            Log.d("登录Fragment", "onResponse: 登录失败");
-                            handler.sendMessage(message);
-                        }
-                    }
-                });
-
+            public void onFailure(Call call, IOException e) {
+                Message message = Message.obtain();
+                message.what = 1;
+                handler.sendMessage(message);
             }
-        }).start();
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String body = (new String(response.body().bytes()));
+                if (body.length() == 0){
+                    Message message = Message.obtain();
+                    message.what = 2;
+                    handler.sendMessage(message);
+                }
+                else {
+                    Gson gson = new Gson();
+                    User user = gson.fromJson(body, User.class);
+                    Message message = Message.obtain();
+                    message.what = 3;
+                    message.obj = user;
+                    handler.sendMessage(message);
+                }
+            }
+        });
     }
 
 }

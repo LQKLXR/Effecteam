@@ -6,17 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
-import com.lqk.effecteam.team.TeamVirtualData;
+import com.lqk.effecteam.common.entity.Team;
 import com.lqk.effecteam.team.home.TeamHomeActivity;
-import com.lqk.effecteam.team.join.JoinTeamAdapter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,13 +42,13 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull TeamViewHolder holder, int position) {
-        String teamName = teamList.get(position).getTeamName();
+        String teamName = teamList.get(position).getName();
         String teamInfo = teamList.get(position).getTeamInfo();
         holder.mTeamName.setText(teamName);
         holder.mTeamInfo.setText(teamInfo);
         /*原形头像设置*/
         if(teamName.length() > 2){
-            holder.mTeamHead.setText(teamName.substring(teamName.length() - 2));
+            holder.mTeamHead.setText(teamName.substring(0, 2));
         }
         else {
             holder.mTeamHead.setText(teamName);

@@ -1,33 +1,24 @@
-package com.lqk.effecteam.team;
+package com.lqk.effecteam.common.entity;
 
 /**
  * Create By LiuQK on 2021/4/5
  * Describe:
  */
 public class User {
-    /*用户ID*/
+
     private int id;
-
-    private String userName;
-
     private String actualName;
-
-    private int gender;
-
+    private String gender;
+    /* 帐号登录相关 */
     private String email;
+    private String password;
 
-    private String phone;
-
-    public User() {
-    }
-
-    public User(int id, String userName, String actualName, int gender, String email, String phone) {
+    public User(int id, String actualName, String gender, String email, String password) {
         this.id = id;
-        this.userName = userName;
         this.actualName = actualName;
         this.gender = gender;
         this.email = email;
-        this.phone = phone;
+        this.password = password;
     }
 
     public int getId() {
@@ -38,14 +29,6 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public String getActualName() {
         return actualName;
     }
@@ -54,11 +37,11 @@ public class User {
         this.actualName = actualName;
     }
 
-    public int getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -70,11 +53,13 @@ public class User {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPassword(String password) {
+        this.password = password;
     }
+
+
 }

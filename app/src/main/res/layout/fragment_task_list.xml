@@ -23,13 +23,18 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/task_list_refresh"
         android:layout_below="@+id/linear_task_list"
-        android:id="@+id/task_list_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/task_list_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/task_list_float_button"

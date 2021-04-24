@@ -2,19 +2,32 @@ package com.lqk.effecteam.task.create;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
+import com.lqk.effecteam.common.HttpUtil;
 import com.lqk.effecteam.team.TeamVirtualData;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class PickActivity extends BaseActivity {
 
@@ -24,10 +37,25 @@ public class PickActivity extends BaseActivity {
 
     private ArrayList<Integer> resultList;
 
-    private static final int PICK_MEMBER_RESULT = 1;
-    private static final int PICK_DOC_RESULT = 2;
-
     private static final String TAG = "PickActivity";
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            switch (msg.what) {
+                case 1: //网络异常情况
+                    Toast.makeText(PickActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
+                    break;
+                case 2:
+                    List<PickItem> pickItems = (List<PickItem>) msg.obj;
+                    mPickAdapter.setPickItemList(pickItems);
+                    mPickAdapter.notifyDataSetChanged();
+                    break;
+                case 3:
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,33 +68,33 @@ public class PickActivity extends BaseActivity {
         mTitleBar = findViewById(R.id.member_pick_title_bar);
         mRecyclerView = findViewById(R.id.pick_recyclerview);
         resultList = new ArrayList<>();
-        mPickAdapter = new PickAdapter(null, resultList);
+        mPickAdapter = new PickAdapter(new ArrayList<>(), resultList);
         mRecyclerView.setAdapter(mPickAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,1));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, 1));
         addListener();
     }
 
 
-    private void addListener(){
+    private void addListener() {
         /*点击返回按钮的时候，携带数据返回上一个Activity*/
         mTitleBar.setLeftClickListener(v -> {
             finish();
         });
+        int projectId = getIntent().getIntExtra("projectId", 0);
+        String url = null;
+
         /*选择人员*/
-        if (getIntent().getIntExtra("type", 0) == 1){
+        if (getIntent().getIntExtra("type", 0) == 1) {
             mTitleBar.setTitle("选择参与人员");
-            //TODO 选择人员的虚假数据
-            mPickAdapter.setPickItemList(TeamVirtualData.pickUserArrayList);
+            url = "getProjectUserList?projectId=" + projectId;
             /*点击确定的时候*/
             mTitleBar.addAction(new TitleBar.TextAction("确定") {
                 @Override
                 public void performAction(View view) {
                     Intent intent = new Intent();
-                    //TODO 选择的人员ID list放进去
-                    Log.d(TAG, "选择人员返回结果" + resultList.toString());
-                    intent.putIntegerArrayListExtra("memberList", resultList);
-                    setResult(PICK_MEMBER_RESULT, intent);
+                    intent.putIntegerArrayListExtra("taskUserList", resultList);
+                    setResult(0, intent);
                     finish();
                 }
             });
@@ -74,20 +102,41 @@ public class PickActivity extends BaseActivity {
         /*选择文档*/
         else {
             mTitleBar.setTitle("选择参考文档");
-            mPickAdapter.setPickItemList(TeamVirtualData.pickDocArrayList);
+            url = "getProjectDocList?projectId=" + projectId;
             /*点击确定的时候*/
             mTitleBar.addAction(new TitleBar.TextAction("确定") {
                 @Override
                 public void performAction(View view) {
                     Intent intent = new Intent();
-                    //TODO 选择的文档ID list放进去
-                    Log.d(TAG, "选择文档返回结果" + resultList.toString());
-                    intent.putIntegerArrayListExtra("docList", resultList);
-                    setResult(PICK_DOC_RESULT, intent);
+                    intent.putIntegerArrayListExtra("taskDocList", resultList);
+                    setResult(0, intent);
                     finish();
                 }
             });
         }
 
+        HttpUtil.connectInternet(url, null, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Message message = Message.obtain();
+                message.what = 1;
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String body = new String(response.body().bytes());
+                Gson gson = new Gson();
+                List<PickItem> pickItems = gson.fromJson(body, new TypeToken<List<PickItem>>(){}.getType());
+                Message message = Message.obtain();
+                message.what = 2;
+                message.obj = pickItems;
+                handler.sendMessage(message);
+            }
+        });
+
+
+
     }
+
 }

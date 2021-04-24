@@ -1,11 +1,16 @@
 package com.lqk.effecteam.team.list;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,17 +18,26 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lqk.effecteam.R;
-import com.lqk.effecteam.team.TeamVirtualData;
+import com.lqk.effecteam.common.HttpUtil;
+import com.lqk.effecteam.common.entity.Team;
 import com.lqk.effecteam.team.create.CreateTeamActivity;
 import com.lqk.effecteam.team.join.JoinTeamActivity;
 import com.xuexiang.xui.adapter.simple.AdapterItem;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.popupwindow.popup.XUISimplePopup;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * Create By LiuQK on 2021/3/29
@@ -42,6 +56,28 @@ public class TeamFragment extends Fragment {
     private TeamAdapter mTeamAdapter;
     /*要显示的团队列表*/
     private List<Team> mTeamList;
+
+    /*下拉刷新*/
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            switch (msg.what){
+                case 1:
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    Toast.makeText(getActivity(), "网络连接失败", Toast.LENGTH_LONG).show();
+                    break;
+                case 2:
+                    mSwipeRefreshLayout.setRefreshing(false);
+                    List<Team> teams = (List<Team>) msg.obj;
+                    mTeamList = teams;
+                    mTeamAdapter.setNewTeamList(teams);
+                    mTeamAdapter.notifyDataSetChanged();
+                    break;
+            }
+        }
+    };
 
     public static final int BACK_TO_TEAM_REQUEST = 3;
 
@@ -68,6 +104,7 @@ public class TeamFragment extends Fragment {
         });
         mSearchView = view.findViewById(R.id.team_list_search);
         mRecyclerView = view.findViewById(R.id.team_list_recyclerview);
+        mSwipeRefreshLayout = view.findViewById(R.id.team_list_refresh);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mXUISimplePopup = new XUISimplePopup(getContext(), new AdapterItem[]{new AdapterItem("搜索团队"), new AdapterItem("创建团队")}).create((adapter, item, position) -> {
             Intent intent = null;
@@ -84,14 +121,14 @@ public class TeamFragment extends Fragment {
                     break;
             }
         });
-        /* TODO 是模拟的虚假数据 */
-        mTeamList = TeamVirtualData.teamArrayList;
-        mTeamAdapter = new TeamAdapter(mTeamList, getActivity());
-        /* 添加分割线 */
+        mTeamAdapter = new TeamAdapter(new ArrayList<Team>(), getActivity());
         mRecyclerView.setAdapter(mTeamAdapter);
+        /* 添加分割线 */
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(),1));
         /*添加各种监听器*/
         addListener();
+        /*加载数据*/
+        loadTeamList();
         
     }
 
@@ -118,6 +155,8 @@ public class TeamFragment extends Fragment {
             }
         });
 
+        mSwipeRefreshLayout.setOnRefreshListener(() -> loadTeamList());
+
     }
 
     /**
@@ -126,14 +165,41 @@ public class TeamFragment extends Fragment {
      * @param text
      * @return
      */
-    public List<Team> teamStringFilter(List<Team> original, String text){
+    private List<Team> teamStringFilter(List<Team> original, String text){
         List<Team> newTeamList = new ArrayList<>();
         for (Team t : original){
-            if(t.getTeamName().contains(text)){
+            if(t.getName().contains(text)){
                 newTeamList.add(t);
             }
         }
         return newTeamList;
     }
 
+
+    public void loadTeamList(){
+        mSwipeRefreshLayout.setRefreshing(true);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(HttpUtil.Shared_File_Name, Context.MODE_PRIVATE);
+        int userId = sharedPreferences.getInt("userId", 0);
+        String url = "getTeamList?userId=" + userId;
+        HttpUtil.connectInternet(url, null, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Message message = Message.obtain();
+                message.what = 1;
+                handler.sendMessage(message);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String body = new String(response.body().bytes());
+                Gson gson = new Gson();
+                List<Team> teams = gson.fromJson(body, new TypeToken<List<Team>>(){}.getType());
+                Message message = Message.obtain();
+                message.what = 2;
+                message.obj = teams;
+                handler.sendMessage(message);
+            }
+        });
+    }
 }

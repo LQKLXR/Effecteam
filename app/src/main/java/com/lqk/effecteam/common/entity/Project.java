@@ -1,4 +1,4 @@
-package com.lqk.effecteam.project.list;
+package com.lqk.effecteam.common.entity;
 
 import java.util.Date;
 
@@ -10,21 +10,24 @@ public class Project {
 
     private int id;
     private String name;
-    private int ownerTeamId;
     private Date startDate;
     private Date endDate;
     private Date maxDate;
+    private int teamId;
+    private String teamName;
+    /*0表示正在进行，1表示已经归档，2表示已经删除*/
+    private int status;
 
-    public Project() {
-    }
 
-    public Project(int id, String name, int ownerTeamId, Date startDate, Date endDate, Date maxDate) {
+    public Project(int id, String name, Date startDate, Date endDate, Date maxDate, int teamId, String teamName, int status) {
         this.id = id;
         this.name = name;
-        this.ownerTeamId = ownerTeamId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.maxDate = maxDate;
+        this.teamId = teamId;
+        this.teamName = teamName;
+        this.status = status;
     }
 
     public int getId() {
@@ -41,14 +44,6 @@ public class Project {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getOwnerTeamId() {
-        return ownerTeamId;
-    }
-
-    public void setOwnerTeamId(int ownerTeamId) {
-        this.ownerTeamId = ownerTeamId;
     }
 
     public Date getStartDate() {
@@ -73,5 +68,29 @@ public class Project {
 
     public void setMaxDate(Date maxDate) {
         this.maxDate = maxDate;
+    }
+
+    public int getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(int teamId) {
+        this.teamId = teamId;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

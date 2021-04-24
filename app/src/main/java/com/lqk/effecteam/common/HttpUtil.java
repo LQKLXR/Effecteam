@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -24,7 +25,9 @@ import okhttp3.Response;
  */
 public class HttpUtil {
 
-    public static String ServerIP = "http://123.57.177.134:8080/";
+    public static String ServerIP = "http://39.108.176.142:8080/";
+    public static String Shared_File_Name = "EffecteamValues";
+
 
 
     public static void connectInternet(String urlString, @Nullable RequestBody requestBody, Callback callback){
@@ -34,13 +37,15 @@ public class HttpUtil {
                 OkHttpClient okHttpClient = new OkHttpClient();
                 Request request = null;
                 if(requestBody == null){
-                    request = new Request.Builder().url(urlString).get().build();
+                    request = new Request.Builder().url(ServerIP + urlString).get().build();
                 }
                 else {
-                    request = new Request.Builder().url(urlString).post(requestBody).build();
+                    request = new Request.Builder().url(ServerIP + urlString).post(requestBody).build();
                 }
                 Call call = okHttpClient.newCall(request);
+
                 call.enqueue(callback);
+
             }
         }).start();
     }

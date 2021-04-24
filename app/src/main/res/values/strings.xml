@@ -40,5 +40,7 @@
     <string name="taskCompleteAlertMenuTitle">确定完成该任务吗？</string>
     <string name="taskDeleteAlertMenuTitle">确定删除该任务吗？</string>
 
+    <string name="loginDialog">正在验证身份</string>
+    <string name="loadingDialog">正在加载</string>
 
 </resources>

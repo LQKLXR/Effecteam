@@ -9,16 +9,35 @@
     android:layout_marginLeft="4dp"
     android:layout_marginRight="4dp">
 
-    <TextView
-        android:id="@+id/viewholder_task_list_name"
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="5"
-        android:textSize="@dimen/textSize15"
-        android:textColor="@color/xui_config_color_white"
-        android:gravity="center_vertical"
-        android:paddingLeft="20dp"
-        android:background="@color/colorPrimary"/>
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/viewholder_task_list_name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:textSize="@dimen/textSize15"
+            android:textColor="@color/xui_config_color_white"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:background="@color/colorPrimary"/>
+        <TextView
+            android:id="@+id/viewholder_task_list_info"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textSize="10sp"
+            android:textColor="@color/xui_config_color_white"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:background="@color/colorPrimary"/>
+    </LinearLayout>
+
+
 
     <com.xuexiang.xui.widget.button.shadowbutton.ShadowButton
         android:id="@+id/viewholder_task_list_button"

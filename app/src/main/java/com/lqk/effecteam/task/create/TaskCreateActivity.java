@@ -3,12 +3,14 @@ package com.lqk.effecteam.task.create;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
 import com.lqk.effecteam.common.calendar.CalenderActivity;
+import com.lqk.effecteam.common.entity.TaskData;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.button.SmoothCheckBox;
 import com.xuexiang.xui.widget.button.roundbutton.RoundButton;
@@ -61,6 +63,9 @@ public class TaskCreateActivity extends BaseActivity {
     }
 
     private void addListener() {
+
+        int projectId = getIntent().getIntExtra("projectId", 0);
+
         /*标题栏*/
         mTaskCreateTitleBar.setLeftClickListener(v -> {
             finish();
@@ -68,6 +73,25 @@ public class TaskCreateActivity extends BaseActivity {
         mTaskCreateTitleBar.addAction(new TitleBar.TextAction("确定") {
             @Override
             public void performAction(View view) {
+
+                if (mTaskCreateTaskName.isEmpty()
+                        || mTaskCreateTaskContent.isEmpty()
+                        || (!mTaskCreateTaskPriorityLow.isChecked() && !mTaskCreateTaskPriorityMiddle.isChecked() && !mTaskCreateTaskPriorityHigh.isChecked())
+                        || getIntent().getIntegerArrayListExtra("taskUserList") == null
+                        || getIntent().getStringExtra("maxDate") == null) {
+                    Toast.makeText(TaskCreateActivity.this, "缺少必填内容！", Toast.LENGTH_SHORT).show();
+                }
+
+                TaskData taskData = new TaskData();
+                taskData.setName(mTaskCreateTaskName.getContentText());
+                taskData.setContent(mTaskCreateTaskContent.getContentText());
+                if (mTaskCreateTaskPriorityLow.isChecked()) {
+                    taskData.setPriority(3);
+                } else if (mTaskCreateTaskPriorityMiddle.isChecked()) {
+                    taskData.setPriority(2);
+                } else if (mTaskCreateTaskPriorityHigh.isChecked()) {
+                    taskData.setPriority(1);
+                }
 
             }
         });
@@ -102,14 +126,14 @@ public class TaskCreateActivity extends BaseActivity {
         /*人员选择*/
         mTaskCreateMemberPickButton.setOnClickListener(v -> {
             Intent intent = new Intent(TaskCreateActivity.this, PickActivity.class);
-            // TODO 携带团队UID进去
+            intent.putExtra("projectId", projectId);
             intent.putExtra("type", PICK_MEMBER_REQUEST);
             startActivityForResult(intent, PICK_MEMBER_REQUEST);
         });
-
+        /*文档选择*/
         mTaskCreateDocPickButton.setOnClickListener(v -> {
             Intent intent = new Intent(TaskCreateActivity.this, PickActivity.class);
-            // TODO 携带团队UID进去
+            intent.putExtra("projectId", projectId);
             intent.putExtra("type", PICK_DOC_REQUEST);
             startActivityForResult(intent, PICK_DOC_REQUEST);
         });
@@ -119,13 +143,13 @@ public class TaskCreateActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
-            if (resultCode == PICK_MEMBER_REQUEST) {
-                ArrayList<Integer> memberList = data.getIntegerArrayListExtra("memberList");
-                mTaskCreateMemberPickButton.setText("已选择" + memberList.size() + "位成员");
-            } else if (resultCode == PICK_DOC_REQUEST) {
-                ArrayList<Integer> memberList = data.getIntegerArrayListExtra("docList");
-                mTaskCreateDocPickButton.setText("已选择" + memberList.size() + "个文档");
-            } else if (resultCode == PICK_DATE_REQUEST) {
+            if (requestCode == PICK_MEMBER_REQUEST) {
+                ArrayList<Integer> taskUserList = data.getIntegerArrayListExtra("taskUserList");
+                mTaskCreateMemberPickButton.setText("已选择" + taskUserList.size() + "位成员");
+            } else if (requestCode == PICK_DOC_REQUEST) {
+                ArrayList<Integer> taskDocList = data.getIntegerArrayListExtra("taskDocList");
+                mTaskCreateDocPickButton.setText("已选择" + taskDocList.size() + "个文档");
+            } else if (requestCode == PICK_DATE_REQUEST) {
                 String dateString = data.getStringExtra("dateString");
                 mTaskCreateMaxDateButton.setText("已选择 " + dateString);
             }

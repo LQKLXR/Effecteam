@@ -15,7 +15,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:strict="">
-        <activity android:name=".mine.download.MineDownLoadActivity"></activity>
+        <activity android:name=".account.RegisterActivity"></activity>
+        <activity android:name=".project.alter.ProjectAlertActivity" />
+        <activity android:name=".mine.download.MineDownLoadActivity" />
         <activity android:name=".mine.dynamic.MineDynamicActivity" />
         <activity android:name=".mine.task.MineTaskActivity" />
         <activity android:name=".project.create.ProjectCreateActivity" />
