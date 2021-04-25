@@ -61,6 +61,7 @@ public class DocFragment extends Fragment {
                     Toast.makeText(getActivity(), "网络连接失败", Toast.LENGTH_SHORT).show();
                     break;
                 case 2: // 正常获得了文件列表的情况
+                    mSwipeRefreshLayout.setRefreshing(false);
                     List<DocumentData> documentDatas = (List<DocumentData>) msg.obj;
                     if (documentDatas.size() == 0) {
                         Toast.makeText(getActivity(), "当前没有文件", Toast.LENGTH_SHORT).show();
@@ -85,6 +86,7 @@ public class DocFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doc, container, false);
         initView(view);
+        loadDoc();
         return view;
     }
 
