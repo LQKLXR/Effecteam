@@ -1,6 +1,5 @@
 package com.lqk.effecteam.team.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,7 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
-import com.lqk.effecteam.MainActivity;
+import com.lqk.effecteam.doc.DocFragment;
 import com.lqk.effecteam.team.chat.TeamChatFragment;
 import com.xuexiang.xui.adapter.FragmentAdapter;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
@@ -32,7 +31,7 @@ public class TeamHomeActivity extends BaseActivity {
     /*翻页式的每个Fragment*/
     private TeamChatFragment mTeamChatFragment;
     private TeamHomeProjectFragment mTeamHomeProjectFragment;
-    private TeamHomeDataFragment mTeamHomeDataFragment;
+    private DocFragment mDocFragment;
     private TeamHomeInfoFragment mTeamHomeInfoFragment;
 
     @Override
@@ -52,11 +51,12 @@ public class TeamHomeActivity extends BaseActivity {
         List<Fragment> fragmentList = new ArrayList<>();
         mTeamChatFragment = new TeamChatFragment();
         mTeamHomeProjectFragment = new TeamHomeProjectFragment();
-        mTeamHomeDataFragment = new TeamHomeDataFragment();
+        mDocFragment = new DocFragment();
+        mDocFragment.setType(DocFragment.TEAM);
         mTeamHomeInfoFragment = new TeamHomeInfoFragment();
         fragmentList.add(mTeamChatFragment);
         fragmentList.add(mTeamHomeProjectFragment);
-        fragmentList.add(mTeamHomeDataFragment);
+        fragmentList.add(mDocFragment);
         fragmentList.add(mTeamHomeInfoFragment);
         mEasyIndicator.setViewPager(mViewPager, new FragmentAdapter<>(getSupportFragmentManager(), fragmentList));
 

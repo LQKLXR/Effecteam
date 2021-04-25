@@ -1,7 +1,9 @@
 package com.lqk.effecteam.project.list;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
+import com.lqk.effecteam.common.HttpUtil;
 import com.lqk.effecteam.common.comparator.ProjectComparator;
 import com.lqk.effecteam.common.entity.Project;
 import com.lqk.effecteam.project.alter.ProjectAlertActivity;
@@ -75,6 +78,8 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
 
     @Override
     public void onBindViewHolder(@NonNull ProjectViewHolder holder, int position) {
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         /*队伍名字是否显示的设置*/
         if (position == 0 || projectList.get(position).getTeamId() != projectList.get(position - 1).getTeamId()) {
             holder.mTeamName.setVisibility(View.VISIBLE);
@@ -84,29 +89,37 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
         }
         /*设置项目名称的显示*/
         holder.mProjectName.setText(projectList.get(position).getName());
-        /*剩余的天数*/
-        long leftTime = projectList.get(position).getMaxDate().getTime() - System.currentTimeMillis();
-        int leftDay = (int) (leftTime / (24 * 60 * 60 * 1000));
-        if (leftDay >= 30) {
-            holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent3));
-            holder.mMaxTime.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent3));
-            holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent3));
-        } else if (leftDay >= 10) {
-            holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent2));
-            holder.mMaxTime.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent2));
-            holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent2));
-        } else if (leftDay < 0){
-            holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectOutDate));
-            holder.mMaxTime.setBackgroundColor(activity.getResources().getColor(R.color.projectOutDate));
-            holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectOutDate));
-        } else {
-            holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent1));
-            holder.mMaxTime.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent1));
-            holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent1));
+        if (projectList.get(position).getStatus() == 1) {
+            holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
+            holder.mMaxTime.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
+            holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.colorPrimary));
+            holder.mMaxTime.setText("完成日期: " + simpleDateFormat.format(projectList.get(position).getEndDate()));
+            holder.projectId = projectList.get(position).getId();
         }
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        holder.mMaxTime.setText("截止日期: " + simpleDateFormat.format(projectList.get(position).getMaxDate()) + "     剩余: " + leftDay + " 天");
-        holder.projectId = projectList.get(position).getId();
+        else if (projectList.get(position).getStatus() == 0) {
+            /*剩余的天数*/
+            long leftTime = projectList.get(position).getMaxDate().getTime() - System.currentTimeMillis();
+            int leftDay = (int) (leftTime / (24 * 60 * 60 * 1000));
+            if (leftDay >= 30) {
+                holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent3));
+                holder.mMaxTime.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent3));
+                holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent3));
+            } else if (leftDay >= 10) {
+                holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent2));
+                holder.mMaxTime.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent2));
+                holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent2));
+            } else if (leftDay < 0){
+                holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectOutDate));
+                holder.mMaxTime.setBackgroundColor(activity.getResources().getColor(R.color.projectOutDate));
+                holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectOutDate));
+            } else {
+                holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent1));
+                holder.mMaxTime.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent1));
+                holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent1));
+            }
+            holder.mMaxTime.setText("截止日期: " + simpleDateFormat.format(projectList.get(position).getMaxDate()) + "     剩余: " + leftDay + " 天");
+            holder.projectId = projectList.get(position).getId();
+        }
     }
 
     @Override
@@ -173,7 +186,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
                                                 }
                                                 else if (fragment instanceof TeamHomeProjectFragment){
                                                     TeamHomeProjectFragment teamHomeProjectFragment = (TeamHomeProjectFragment) ProjectAdapter.this.fragment;
-                                                    // TODO
+                                                    teamHomeProjectFragment.completeProject(projectId);
                                                 }
                                             })
                                             .show();
@@ -192,7 +205,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
                                                 }
                                                 else if (fragment instanceof TeamHomeProjectFragment){
                                                     TeamHomeProjectFragment teamHomeProjectFragment = (TeamHomeProjectFragment) ProjectAdapter.this.fragment;
-                                                    // TODO
+                                                    teamHomeProjectFragment.deleteProject(projectId);
                                                 }
                                             })
                                             .show();

@@ -19,8 +19,7 @@ import com.google.gson.reflect.TypeToken;
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
 import com.lqk.effecteam.common.HttpUtil;
-import com.lqk.effecteam.common.entity.Team;
-import com.lqk.effecteam.common.entity.TeamData;
+import com.lqk.effecteam.common.data.TeamData;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 

@@ -105,6 +105,7 @@ public class TeamFragment extends Fragment {
         mSearchView = view.findViewById(R.id.team_list_search);
         mRecyclerView = view.findViewById(R.id.team_list_recyclerview);
         mSwipeRefreshLayout = view.findViewById(R.id.team_list_refresh);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mXUISimplePopup = new XUISimplePopup(getContext(), new AdapterItem[]{new AdapterItem("搜索团队"), new AdapterItem("创建团队")}).create((adapter, item, position) -> {
             Intent intent = null;

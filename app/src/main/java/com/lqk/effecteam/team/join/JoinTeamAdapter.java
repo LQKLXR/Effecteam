@@ -9,8 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
-import com.lqk.effecteam.common.entity.Team;
-import com.lqk.effecteam.common.entity.TeamData;
+import com.lqk.effecteam.common.data.TeamData;
 import com.xuexiang.xui.widget.textview.supertextview.SuperButton;
 
 import java.util.List;

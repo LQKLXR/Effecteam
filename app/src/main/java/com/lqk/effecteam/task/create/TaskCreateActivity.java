@@ -16,7 +16,7 @@ import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
 import com.lqk.effecteam.common.HttpUtil;
 import com.lqk.effecteam.common.calendar.CalenderActivity;
-import com.lqk.effecteam.common.entity.TaskData;
+import com.lqk.effecteam.common.data.TaskData;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.button.SmoothCheckBox;
 import com.xuexiang.xui.widget.button.roundbutton.RoundButton;

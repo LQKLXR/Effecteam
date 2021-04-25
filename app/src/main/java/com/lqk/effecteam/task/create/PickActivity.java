@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,7 +17,6 @@ import com.google.gson.reflect.TypeToken;
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
 import com.lqk.effecteam.common.HttpUtil;
-import com.lqk.effecteam.team.TeamVirtualData;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 
 import java.io.IOException;

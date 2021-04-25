@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.google.gson.Gson;
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.HttpUtil;
-import com.lqk.effecteam.common.entity.TeamData;
+import com.lqk.effecteam.common.data.TeamData;
 import com.lqk.effecteam.team.member.TeamMemberListActivity;
 import com.xuexiang.xui.widget.layout.ExpandableLayout;
 import com.xuexiang.xui.widget.textview.supertextview.SuperTextView;

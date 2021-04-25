@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lqk.effecteam.R;
-import com.lqk.effecteam.project.ProjectVirtualData;
-import com.lqk.effecteam.team.TeamVirtualData;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
@@ -29,24 +30,25 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     private static final String TAG = "TaskAdapter";
 
     private Activity activity;
+    private Fragment fragment;
     private List<Task> taskList;
 
     /*任务排序器*/
     private TaskComparator taskComparator;
 
 
-
-    public TaskAdapter(Activity activity, List<Task> taskList) {
+    public TaskAdapter(Activity activity, Fragment fragment, List<Task> taskList) {
         this.activity = activity;
+        this.fragment = fragment;
         this.taskList = taskList;
         taskComparator = new TaskComparator("Priority");
     }
 
-    public void sortType(String type){
+    public void sortType(String type) {
         taskComparator.setType(type);
     }
 
-    public void sort(){
+    public void sort() {
         Collections.sort(taskList, taskComparator);
         notifyDataSetChanged();
     }
@@ -126,9 +128,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                                             .negativeText(R.string.No)
                                             .onPositive((dialog1, which) -> {
                                                 /*点了确定*/
-                                                // TODO
-
-                                                notifyDataSetChanged();
+                                                TaskFragment taskFragment = (TaskFragment) TaskAdapter.this.fragment;
+                                                taskFragment.operateTask(mTaskId, TaskFragment.TASK_COMPLETE);
+                                                taskFragment.loadTaskList();
                                                 Log.i(TAG, "正在完成任务: ");
                                             })
                                             .show();
@@ -141,8 +143,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                                             .negativeText(R.string.No)
                                             .onPositive((dialog1, which) -> {
                                                 /*点了确定*/
-                                                // TODO
-
+                                                TaskFragment taskFragment = (TaskFragment) TaskAdapter.this.fragment;
+                                                taskFragment.operateTask(mTaskId, TaskFragment.TASK_DELETE);
+                                                taskFragment.loadTaskList();
                                                 notifyDataSetChanged();
                                                 Log.i(TAG, "正在删除任务: ");
                                             })

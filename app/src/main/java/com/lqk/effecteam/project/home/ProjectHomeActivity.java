@@ -1,6 +1,5 @@
 package com.lqk.effecteam.project.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,7 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
-import com.lqk.effecteam.MainActivity;
+import com.lqk.effecteam.doc.DocFragment;
 import com.lqk.effecteam.project.dynamic.DynamicsFragment;
 import com.lqk.effecteam.task.list.TaskFragment;
 import com.xuexiang.xui.adapter.FragmentAdapter;
@@ -29,7 +28,7 @@ public class ProjectHomeActivity extends BaseActivity {
 
     private TaskFragment mTaskFragment;
     private DynamicsFragment mDynamicsFragment;
-    private ProjectHomeDataFragment mProjectHomeDataFragment;
+    private DocFragment mDocFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +48,11 @@ public class ProjectHomeActivity extends BaseActivity {
         List<Fragment> fragmentList = new ArrayList<>();
         mTaskFragment = new TaskFragment();
         mDynamicsFragment = new DynamicsFragment();
-        mProjectHomeDataFragment = new ProjectHomeDataFragment();
+        mDocFragment = new DocFragment();
+        mDocFragment.setType(DocFragment.PROJECT);
         fragmentList.add(mTaskFragment);
         fragmentList.add(mDynamicsFragment);
-        fragmentList.add(mProjectHomeDataFragment);
+        fragmentList.add(mDocFragment);
         mEasyIndicator.setViewPager(mViewPager, new FragmentAdapter<>(getSupportFragmentManager(), fragmentList));
         mTaskFragment.setType(0);
         mTitleBar.setLeftClickListener(v -> {

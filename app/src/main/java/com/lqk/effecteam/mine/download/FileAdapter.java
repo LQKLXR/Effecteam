@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
+import com.lqk.effecteam.common.data.DocumentData;
 
 import java.io.File;
 import java.util.List;
@@ -20,10 +21,14 @@ import java.util.List;
  */
 public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder> {
 
-    private List<File> fileList;
+    private List<DocumentData> documentDataList;
 
-    public FileAdapter(List<File> fileList) {
-        this.fileList = fileList;
+    public FileAdapter(List<DocumentData> documentDataList) {
+        this.documentDataList = documentDataList;
+    }
+
+    public void setDocumentDataList(List<DocumentData> documentDataList) {
+        this.documentDataList = documentDataList;
     }
 
     @NonNull
@@ -36,8 +41,8 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull FileViewHolder holder, int position) {
-        File curFile = fileList.get(position);
-        String fileName = curFile.getName();
+
+        String fileName = documentDataList.get(position).getOriginalName();
         if (fileName.endsWith(".jpg")) {
             holder.mFileIcon.setImageResource(R.drawable.icon_file_jpg);
         } else if (fileName.endsWith(".mp4")) {
@@ -63,7 +68,7 @@ public class FileAdapter extends RecyclerView.Adapter<FileAdapter.FileViewHolder
 
     @Override
     public int getItemCount() {
-        return fileList.size();
+        return documentDataList.size();
     }
 
     class FileViewHolder extends RecyclerView.ViewHolder {

@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
-import com.lqk.effecteam.team.TeamVirtualData;
 
 import java.text.SimpleDateFormat;
 import java.util.List;

@@ -66,9 +66,14 @@ public class ProjectFragment extends Fragment {
                 case 2: //重新加载项目列表
                     mSwipeRefreshLayout.setRefreshing(false);
                     mProjectList = (List<Project>) msg.obj;
-                    //mProjectAdapter.setProjectList(mProjectList);
-                    //mProjectAdapter.sort();
-                    selectProjectStatus(mCompleteSpinner.getSelectedIndex());
+                    if (mProjectList.size() == 0){
+                        Toast.makeText(getActivity(), "当前没有项目", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        Toast.makeText(getActivity(), "刷新完成", Toast.LENGTH_LONG).show();
+                        selectProjectStatus(mCompleteSpinner.getSelectedIndex());
+                    }
+
                     break;
                 case 3: //输出服务端出来的各种异常
                     mSwipeRefreshLayout.setRefreshing(false);
@@ -106,6 +111,7 @@ public class ProjectFragment extends Fragment {
         mTitleBar = view.findViewById(R.id.project_list_title_bar);
         mTitleBar.disableLeftView();
         mSwipeRefreshLayout = view.findViewById(R.id.project_list_refresh);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         mCompleteSpinner = view.findViewById(R.id.project_list_complete_spinner);
         mTeamTimeSpinner = view.findViewById(R.id.project_list_teamtime_spinner);
         mCompleteSpinner.setItems("进行中", "已完成", "全部");
@@ -153,7 +159,9 @@ public class ProjectFragment extends Fragment {
     }
 
     private void selectProjectStatus(int position) {
-
+        if (mProjectList == null || mProjectList.size() == 0){
+            return;
+        }
         List<Project> selectProjects = new ArrayList<>();
         switch (position) {
             case 0:

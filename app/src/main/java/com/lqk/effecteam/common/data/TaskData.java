@@ -1,4 +1,4 @@
-package com.lqk.effecteam.common.entity;
+package com.lqk.effecteam.common.data;
 
 import java.util.List;
 
