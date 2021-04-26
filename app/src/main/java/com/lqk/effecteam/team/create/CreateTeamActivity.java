@@ -15,8 +15,7 @@ import androidx.annotation.NonNull;
 
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
-import com.lqk.effecteam.common.HttpUtil;
-import com.lqk.effecteam.team.join.JoinTeamActivity;
+import com.lqk.effecteam.common.util.HttpUtil;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 
@@ -43,18 +42,18 @@ public class CreateTeamActivity extends BaseActivity {
     public static final int BACK_TO_TEAM_RESULT = 3;
 
     /*加载转圈*/
-    private MaterialDialog mMaterialDialog;
+    private MaterialDialog mLoadingDialog;
 
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(@NonNull Message msg) {
             switch (msg.what){
                 case 1:
-                    mMaterialDialog.dismiss();
+                    mLoadingDialog.dismiss();
                     Toast.makeText(CreateTeamActivity.this, "网络连接失败", Toast.LENGTH_SHORT).show();
                     break;
                 case 2:
-                    mMaterialDialog.dismiss();
+                    mLoadingDialog.dismiss();
                     Intent intent = new Intent();
                     intent.putExtra("toast", "创建成功");
                     setResult(BACK_TO_TEAM_RESULT, intent);
@@ -75,7 +74,7 @@ public class CreateTeamActivity extends BaseActivity {
      * 绑定各个组件ID
      */
     private void initView() {
-        mMaterialDialog = new MaterialDialog.Builder(CreateTeamActivity.this).content(R.string.loadingDialog)
+        mLoadingDialog = new MaterialDialog.Builder(CreateTeamActivity.this).content(R.string.loadingDialog)
                 .progress(true, 0)
                 .progressIndeterminateStyle(false).build();
         mTitleBar = findViewById(R.id.create_team_title_bar);
@@ -98,7 +97,7 @@ public class CreateTeamActivity extends BaseActivity {
         }).addAction(new TitleBar.TextAction("确定") {
             @Override
             public void performAction(View view) {
-                mMaterialDialog.show();
+                mLoadingDialog.show();
                 /* 获得输入信息 */
                 String name = mTeamName.getText().toString();
                 String info = mTeamInfo.getText().toString();

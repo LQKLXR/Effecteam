@@ -23,7 +23,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lqk.effecteam.R;
-import com.lqk.effecteam.common.HttpUtil;
+import com.lqk.effecteam.common.util.HttpUtil;
 import com.lqk.effecteam.common.entity.Team;
 import com.lqk.effecteam.team.create.CreateTeamActivity;
 import com.lqk.effecteam.team.join.JoinTeamActivity;

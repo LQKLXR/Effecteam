@@ -1,23 +1,17 @@
 package com.lqk.effecteam.project.list;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
-import com.lqk.effecteam.common.HttpUtil;
 import com.lqk.effecteam.common.comparator.ProjectComparator;
 import com.lqk.effecteam.common.entity.Project;
 import com.lqk.effecteam.project.alter.ProjectAlertActivity;

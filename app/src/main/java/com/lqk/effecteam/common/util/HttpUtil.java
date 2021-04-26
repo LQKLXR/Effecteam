@@ -1,4 +1,4 @@
-package com.lqk.effecteam.common;
+package com.lqk.effecteam.common.util;
 
 import androidx.annotation.Nullable;
 

@@ -1,10 +1,13 @@
 package com.lqk.effecteam.doc;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +21,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lqk.effecteam.R;
-import com.lqk.effecteam.common.HttpUtil;
+import com.lqk.effecteam.common.util.HttpUtil;
 import com.lqk.effecteam.common.data.DocumentData;
+import com.lqk.effecteam.common.util.Uri2PathUtil;
 import com.lqk.effecteam.mine.download.FileAdapter;
 
 import java.io.File;
@@ -32,7 +37,12 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Create By LiuQK on 2021/4/25
@@ -49,6 +59,8 @@ public class DocFragment extends Fragment {
     private FileAdapter mFileAdapter;
 
     private List<DocumentData> documentDataList;
+
+    private FloatingActionButton mFloatButton;
 
     /* 根据当前 Fragment 所处的位置, 发挥不同的作用 */
     private int type;
@@ -71,6 +83,10 @@ public class DocFragment extends Fragment {
                         mFileAdapter.setDocumentDataList(documentDataList);
                         mFileAdapter.notifyDataSetChanged();
                     }
+                    break;
+                case 3:
+                    Toast.makeText(getActivity(), "上传文件成功", Toast.LENGTH_SHORT).show();
+                    loadDoc();
                     break;
             }
         }
@@ -97,13 +113,24 @@ public class DocFragment extends Fragment {
         mMineDownloadRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         mMineDownloadRecyclerview.setAdapter(mFileAdapter);
         mMineDownloadRecyclerview.addItemDecoration(new DividerItemDecoration(getActivity(), 1));
+
         mSwipeRefreshLayout = view.findViewById(R.id.doc_refresh);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        mFloatButton = view.findViewById(R.id.doc_float_button);
 
         addListener();
     }
 
     private void addListener() {
         mSwipeRefreshLayout.setOnRefreshListener(this::loadDoc);
+
+        /*点击悬浮按钮-进入系统文件选择器*/
+        mFloatButton.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("*/*");
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            startActivityForResult(intent, 120);
+        });
     }
 
 
@@ -182,5 +209,54 @@ public class DocFragment extends Fragment {
      */
     private void loadLocalDoc() {
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 120 && resultCode == RESULT_OK) {
+            Uri uri = data.getData();
+            Log.d("ChooseFile", uri.toString());
+
+            File filePathByUri = null;
+            try {
+                filePathByUri = Uri2PathUtil.getFile(getActivity(), uri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Log.d("ChooseFile", filePathByUri.getAbsolutePath());
+
+            File file = new File(filePathByUri.getAbsolutePath());
+
+            int userId = getActivity().getIntent().getIntExtra("userId", 0);
+            int projectId = getActivity().getIntent().getIntExtra("projectId", 0);
+            RequestBody requestBody = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("file", file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file))
+                    .addFormDataPart("userId", String.valueOf(userId))
+                    .addFormDataPart("projectId", String.valueOf(projectId))
+                    .build();
+            HttpUtil.connectInternet("uploadDocument", requestBody, new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Message message = Message.obtain();
+                    message.what = 1;
+                    handler.sendMessage(message);
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String body = new String(response.body().bytes());
+                    if (body.equals("success")) {
+                        Message message = Message.obtain();
+                        message.what = 3;
+                        handler.sendMessage(message);
+                    }
+                    else {
+
+                    }
+                }
+            });
+        }
     }
 }

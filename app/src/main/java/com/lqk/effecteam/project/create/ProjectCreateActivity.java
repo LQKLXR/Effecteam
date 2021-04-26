@@ -54,7 +54,7 @@ public class ProjectCreateActivity extends BaseActivity {
         mProjectCreateProjectName = findViewById(R.id.project_create_project_name);
         mProjectCreateProjectContent = findViewById(R.id.project_create_project_content);
         mProjectCreateMaxDateButton = findViewById(R.id.project_create_max_date_button);
-
+        
         addListener();
     }
 

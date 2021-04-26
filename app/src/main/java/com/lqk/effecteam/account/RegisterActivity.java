@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
-import com.lqk.effecteam.common.HttpUtil;
+import com.lqk.effecteam.common.util.HttpUtil;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.button.SmoothCheckBox;
 import com.xuexiang.xui.widget.edittext.MultiLineEditText;

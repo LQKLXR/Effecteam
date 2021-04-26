@@ -20,15 +20,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lqk.effecteam.R;
-import com.lqk.effecteam.common.HttpUtil;
-import com.lqk.effecteam.common.comparator.ProjectComparator;
+import com.lqk.effecteam.common.util.HttpUtil;
 import com.lqk.effecteam.common.entity.Project;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.spinner.materialspinner.MaterialSpinner;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import okhttp3.Call;

@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
-import com.lqk.effecteam.common.HttpUtil;
+import com.lqk.effecteam.common.util.HttpUtil;
 import com.lqk.effecteam.common.data.TeamData;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
@@ -45,7 +45,7 @@ public class JoinTeamActivity extends BaseActivity {
     public static final int BACK_TO_TEAM_RESULT = 3;
 
     /*加载转圈*/
-    private MaterialDialog mMaterialDialog;
+    private MaterialDialog mLoadingDialog;
 
     private Handler handler = new Handler() {
         @Override
@@ -66,11 +66,11 @@ public class JoinTeamActivity extends BaseActivity {
                     break;
                 case 3: // 处理申请加入队伍
                     Toast.makeText(JoinTeamActivity.this, "申请成功", Toast.LENGTH_SHORT).show();
-                    mMaterialDialog.dismiss();
+                    mLoadingDialog.dismiss();
                     break;
                 case 4:
                     Toast.makeText(JoinTeamActivity.this, msg.obj.toString(), Toast.LENGTH_LONG).show();
-                    mMaterialDialog.dismiss();
+                    mLoadingDialog.dismiss();
                     break;
             }
         }
@@ -85,7 +85,7 @@ public class JoinTeamActivity extends BaseActivity {
     }
 
     private void initView() {
-        mMaterialDialog = new MaterialDialog.Builder(JoinTeamActivity.this).content(R.string.loadingDialog)
+        mLoadingDialog = new MaterialDialog.Builder(JoinTeamActivity.this).content(R.string.loadingDialog)
                 .progress(true, 0)
                 .progressIndeterminateStyle(false).build();
         mTitleBar = findViewById(R.id.join_team_title_bar);
@@ -150,7 +150,7 @@ public class JoinTeamActivity extends BaseActivity {
      * @param teamId
      */
     public void applyForTeam(int teamId) {
-        mMaterialDialog.show();
+        mLoadingDialog.show();
         SharedPreferences sharedPreferences = getSharedPreferences(HttpUtil.Shared_File_Name, Context.MODE_PRIVATE);
         int userId = sharedPreferences.getInt("userId", 0);
 

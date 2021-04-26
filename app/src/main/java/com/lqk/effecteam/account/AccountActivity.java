@@ -3,9 +3,6 @@ package com.lqk.effecteam.account;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -15,8 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import com.lqk.effecteam.MainActivity;
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
-import com.lqk.effecteam.common.HttpUtil;
-import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
+import com.lqk.effecteam.common.util.HttpUtil;
 
 /**
  * Create By LiuQK on 2021/3/23

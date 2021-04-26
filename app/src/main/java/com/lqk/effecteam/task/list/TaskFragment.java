@@ -22,7 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.lqk.effecteam.R;
-import com.lqk.effecteam.common.HttpUtil;
+import com.lqk.effecteam.common.util.HttpUtil;
 import com.lqk.effecteam.common.entity.Task;
 import com.lqk.effecteam.task.create.TaskCreateActivity;
 import com.xuexiang.xui.widget.spinner.materialspinner.MaterialSpinner;

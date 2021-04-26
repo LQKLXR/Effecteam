@@ -18,12 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.SharedPreferencesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
 import com.lqk.effecteam.R;
-import com.lqk.effecteam.common.HttpUtil;
+import com.lqk.effecteam.common.util.HttpUtil;
 import com.lqk.effecteam.MainActivity;
 import com.lqk.effecteam.common.entity.User;
 import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
@@ -33,8 +32,6 @@ import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 
 /**
@@ -53,7 +50,7 @@ public class LoginFragment extends Fragment {
     private TextView mToRegisterText;
 
     /*加载转圈*/
-    private MaterialDialog mMaterialDialog;
+    private MaterialDialog mLoadingDialog;
 
 
     private Handler handler = new Handler() {
@@ -62,11 +59,11 @@ public class LoginFragment extends Fragment {
         public void handleMessage(@NonNull Message msg) {
             switch (msg.what) {
                 case 1:
-                    mMaterialDialog.dismiss();
+                    mLoadingDialog.dismiss();
                     Toast.makeText(getActivity(), "网络连接失败", Toast.LENGTH_LONG).show();
                     break;
                 case 2:
-                    mMaterialDialog.dismiss();
+                    mLoadingDialog.dismiss();
                     Toast.makeText(getActivity(), "帐号或密码错误", Toast.LENGTH_SHORT).show();
                     break;
                 case 3:
@@ -78,7 +75,7 @@ public class LoginFragment extends Fragment {
                     editor.putString("gender", user.getGender());
                     editor.commit();
 
-                    mMaterialDialog.dismiss();
+                    mLoadingDialog.dismiss();
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     intent.putExtra("userId", user.getId());
                     intent.putExtra("actualName", user.getActualName());
@@ -106,7 +103,7 @@ public class LoginFragment extends Fragment {
         mLoginButton = view.findViewById(R.id.login_button);
         mToRegisterText = view.findViewById(R.id.to_register_text);
 
-        mMaterialDialog = new MaterialDialog.Builder(getActivity()).content(R.string.loginDialog)
+        mLoadingDialog = new MaterialDialog.Builder(getActivity()).content(R.string.loginDialog)
                 .progress(true, 0)
                 .progressIndeterminateStyle(false).build();
 
@@ -141,7 +138,7 @@ public class LoginFragment extends Fragment {
      */
     private void login() {
         //开启加载进度条
-        mMaterialDialog.show();
+        mLoadingDialog.show();
 
         FormBody formBody = new FormBody.Builder().add("email", mInputPhoneNumber.getText().toString())
                 .add("password", mInputPasswordText.getText().toString()).build();

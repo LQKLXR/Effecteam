@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import com.google.gson.Gson;
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.BaseActivity;
-import com.lqk.effecteam.common.HttpUtil;
+import com.lqk.effecteam.common.util.HttpUtil;
 import com.lqk.effecteam.common.calendar.CalenderActivity;
 import com.lqk.effecteam.common.data.TaskData;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
