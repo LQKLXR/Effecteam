@@ -68,7 +68,7 @@ public class ProjectFragment extends Fragment {
                         Toast.makeText(getActivity(), "当前没有项目", Toast.LENGTH_LONG).show();
                     }
                     else {
-                        Toast.makeText(getActivity(), "刷新完成", Toast.LENGTH_LONG).show();
+                        // Toast.makeText(getActivity(), "刷新完成", Toast.LENGTH_LONG).show();
                         selectProjectStatus(mCompleteSpinner.getSelectedIndex());
                     }
 
@@ -120,6 +120,12 @@ public class ProjectFragment extends Fragment {
         mRecyclerView.setAdapter(mProjectAdapter);
 
         addListener(view);
+        loadProjectList();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         loadProjectList();
     }
 
@@ -191,7 +197,7 @@ public class ProjectFragment extends Fragment {
     /**
      * 加载新的ProjectList
      */
-    private void loadProjectList() {
+    public void loadProjectList() {
         /*开始转圈加载*/
         mSwipeRefreshLayout.setRefreshing(true);
 
@@ -301,6 +307,7 @@ public class ProjectFragment extends Fragment {
             }
         });
     }
+
 
 
 }

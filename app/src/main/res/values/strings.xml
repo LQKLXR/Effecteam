@@ -9,9 +9,6 @@
     <string name="title_teams">团队</string>
     <string name="title_person">我的</string>
 
-    <color name="WHITE">#FFFFFF</color>
-    <color name="BLACK">#000000</color>
-
     <dimen name="teamInfoHeight">60dp</dimen>
     <dimen name="textSize15">15sp</dimen>
     <dimen name="titleBarHeight">40dp</dimen><!--暂未用到-->
@@ -40,7 +37,8 @@
     <string name="taskCompleteAlertMenuTitle">确定完成该任务吗？</string>
     <string name="taskDeleteAlertMenuTitle">确定删除该任务吗？</string>
 
-    <string name="loginDialog">正在验证身份</string>
+    <string name="loginLoading">正在验证身份</string>
     <string name="loadingDialog">正在加载</string>
+    <string name="downloadLoading">正在下载</string>
 
 </resources>

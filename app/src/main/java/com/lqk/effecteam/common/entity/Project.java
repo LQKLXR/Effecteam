@@ -10,6 +10,7 @@ public class Project {
 
     private int id;
     private String name;
+    private String info;
     private Date startDate;
     private Date endDate;
     private Date maxDate;
@@ -18,16 +19,24 @@ public class Project {
     /*0表示正在进行，1表示已经归档，2表示已经删除*/
     private int status;
 
-
-    public Project(int id, String name, Date startDate, Date endDate, Date maxDate, int teamId, String teamName, int status) {
+    public Project(int id, String name, String info, Date startDate, Date endDate, Date maxDate, int teamId, String teamName, int status) {
         this.id = id;
         this.name = name;
+        this.info = info;
         this.startDate = startDate;
         this.endDate = endDate;
         this.maxDate = maxDate;
         this.teamId = teamId;
         this.teamName = teamName;
         this.status = status;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public int getId() {

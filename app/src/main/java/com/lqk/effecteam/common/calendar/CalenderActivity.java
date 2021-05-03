@@ -59,7 +59,7 @@ public class CalenderActivity extends BaseActivity {
             @Override
             public void onCalendarSelect(Calendar calendar, boolean isClick) {
                 Calendar selectedCalendar = calendarView.getSelectedCalendar();
-                dateString = calendarView.getCurYear()+ "-" + calendarView.getCurMonth() + "-" + calendarView.getCurDay();
+                dateString = selectedCalendar.getYear()+ "-" + selectedCalendar.getMonth() + "-" + selectedCalendar.getDay();
                 titleBar.setTitle(dateString);
             }
         });

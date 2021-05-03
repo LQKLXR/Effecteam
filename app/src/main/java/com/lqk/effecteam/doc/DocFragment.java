@@ -29,6 +29,8 @@ import com.lqk.effecteam.common.util.HttpUtil;
 import com.lqk.effecteam.common.data.DocumentData;
 import com.lqk.effecteam.common.util.Uri2PathUtil;
 import com.lqk.effecteam.mine.download.FileAdapter;
+import com.lqk.effecteam.team.join.JoinTeamActivity;
+import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,6 +64,9 @@ public class DocFragment extends Fragment {
 
     private FloatingActionButton mFloatButton;
 
+    /*加载转圈*/
+    private MaterialDialog mLoadingDialog;
+
     /* 根据当前 Fragment 所处的位置, 发挥不同的作用 */
     private int type;
 
@@ -70,13 +75,14 @@ public class DocFragment extends Fragment {
         public void handleMessage(@NonNull Message msg) {
             switch (msg.what) {
                 case 1: // 网络异常的情况
+                    mSwipeRefreshLayout.setRefreshing(false);
                     Toast.makeText(getActivity(), "网络连接失败", Toast.LENGTH_SHORT).show();
                     break;
                 case 2: // 正常获得了文件列表的情况
                     mSwipeRefreshLayout.setRefreshing(false);
                     List<DocumentData> documentDatas = (List<DocumentData>) msg.obj;
                     if (documentDatas.size() == 0) {
-                        Toast.makeText(getActivity(), "当前没有文件", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getActivity(), "当前没有文件", Toast.LENGTH_SHORT).show();
                     }
                     else {
                         documentDataList = documentDatas;
@@ -108,8 +114,12 @@ public class DocFragment extends Fragment {
 
     private void initView(View view) {
 
+        mLoadingDialog = new MaterialDialog.Builder(getActivity()).content(R.string.downloadLoading)
+                .progress(true, 0)
+                .progressIndeterminateStyle(false).build();
+
         mMineDownloadRecyclerview = view.findViewById(R.id.doc_recyclerview);
-        mFileAdapter = new FileAdapter(new ArrayList<>());
+        mFileAdapter = new FileAdapter(new ArrayList<>(), DocFragment.this);
         mMineDownloadRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         mMineDownloadRecyclerview.setAdapter(mFileAdapter);
         mMineDownloadRecyclerview.addItemDecoration(new DividerItemDecoration(getActivity(), 1));
@@ -208,7 +218,18 @@ public class DocFragment extends Fragment {
      * 加载本地的文件
      */
     private void loadLocalDoc() {
-
+        documentDataList = new ArrayList<>();
+        SharedPreferences sp = getActivity().getSharedPreferences(HttpUtil.Shared_File_Name, Context.MODE_PRIVATE);
+        String email = sp.getString("email", "");
+        String dirPath = HttpUtil.FileDir + File.separator + email;
+        File fileDir = new File(dirPath);
+        File[] files = fileDir.listFiles();
+        Log.d("nowTest", "loadLocalDoc: " + files.length);
+        for (File file : files) {
+            documentDataList.add(new DocumentData(0, file.getName(), null, file.getAbsolutePath(), 0, null));
+        }
+        mFileAdapter.setDocumentDataList(documentDataList);
+        mFileAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -227,8 +248,8 @@ public class DocFragment extends Fragment {
             Log.d("ChooseFile", filePathByUri.getAbsolutePath());
 
             File file = new File(filePathByUri.getAbsolutePath());
-
-            int userId = getActivity().getIntent().getIntExtra("userId", 0);
+            SharedPreferences sp = getActivity().getSharedPreferences(HttpUtil.Shared_File_Name, Context.MODE_PRIVATE);
+            int userId = sp.getInt("userId", 0);
             int projectId = getActivity().getIntent().getIntExtra("projectId", 0);
             RequestBody requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
@@ -258,5 +279,14 @@ public class DocFragment extends Fragment {
                 }
             });
         }
+    }
+
+
+    public void showLoading(){
+        mLoadingDialog.show();
+    }
+
+    public void closeLoading(){
+        mLoadingDialog.dismiss();
     }
 }

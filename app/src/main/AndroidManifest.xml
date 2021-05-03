@@ -15,7 +15,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:strict="">
-        <activity android:name=".account.RegisterActivity"></activity>
+        <activity android:name=".task.alter.AlterTaskActivity"></activity>
+        <activity android:name=".mine.AlertInfoActivity" />
+        <activity android:name=".home.simplenotice.SimpleNoticeActivity" />
+        <activity android:name=".home.applynotice.ApplyNoticeActivity" />
+        <activity android:name=".account.RegisterActivity" />
         <activity android:name=".project.alter.ProjectAlertActivity" />
         <activity android:name=".mine.download.MineDownLoadActivity" />
         <activity android:name=".mine.dynamic.MineDynamicActivity" />
@@ -36,7 +40,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity" /> <!-- Android 7以上调用其他应用打开自己的文件相关 -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.lqk.effecteam.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
     </application>
 
 </manifest>

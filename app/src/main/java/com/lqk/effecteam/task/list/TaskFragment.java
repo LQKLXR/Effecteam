@@ -75,13 +75,13 @@ public class TaskFragment extends Fragment {
                     mSwipeRefreshLayout.setRefreshing(false);
                     List<Task> tasks = (List<Task>) msg.obj;
                     if (tasks.size() == 0) {
-                        Toast.makeText(getActivity(), "当前没有任务", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "当前没有任务", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getActivity(), "刷新完成", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getActivity(), "刷新完成", Toast.LENGTH_SHORT).show();
                         taskList = tasks;
                         selectTaskByStatus(mCompleteSpinner.getSelectedIndex());
-                        break;
                     }
+                    break;
                 case 3: // 其它的显示情况
                     Toast.makeText(getActivity(), msg.obj.toString(), Toast.LENGTH_SHORT).show();
                     break;
@@ -315,6 +315,13 @@ public class TaskFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 10 && resultCode == -1) {
             Toast.makeText(getActivity(), "创建成功", Toast.LENGTH_SHORT).show();
+            loadTaskList();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadTaskList();
     }
 }

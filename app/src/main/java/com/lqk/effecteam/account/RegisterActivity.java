@@ -36,6 +36,8 @@ public class RegisterActivity extends BaseActivity {
     private SmoothCheckBox mRegisterCheckNv;
 
 
+
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(@NonNull Message msg) {

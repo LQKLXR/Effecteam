@@ -43,6 +43,8 @@ public class TeamHomeActivity extends BaseActivity {
 
     private void initView() {
         mTitleBar = findViewById(R.id.team_home_title_bar);
+        String teamName = getIntent().getStringExtra("teamName");
+        mTitleBar.setTitle(teamName);
         mEasyIndicator = findViewById(R.id.team_home_easy_indicator);
         mViewPager = findViewById(R.id.team_home_view_pager);
 

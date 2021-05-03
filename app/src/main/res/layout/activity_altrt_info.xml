@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".mine.AlertInfoActivity">
+
+    <com.xuexiang.xui.widget.actionbar.TitleBar
+        android:id="@+id/alter_info_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tb_actionPadding="20dp"
+        app:tb_centerGravity="center"
+        app:tb_titleText="修改个人信息"
+        app:tb_titleTextSize="@dimen/textSize15"
+        app:tb_useThemeColor="true"
+        />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/BLACK"
+        android:textSize="@dimen/textSize15"
+        android:text="新的姓名" />
+
+    <com.xuexiang.xui.widget.edittext.MultiLineEditText
+        android:id="@+id/alter_info_actualname"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_rectangle_textview"
+        app:mlet_maxCount="20"
+        app:mlet_hintText="请输入真实姓名(必填)"
+        app:mlet_showSurplusNumber="true"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/BLACK"
+        android:textSize="@dimen/textSize15"
+        android:text="性别 (必选)" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/BLACK"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/textSize15"
+            android:text="男"
+            android:layout_marginLeft="20dp"/>
+        <com.xuexiang.xui.widget.button.SmoothCheckBox
+            android:id="@+id/alter_info_check_nan"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/BLACK"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/textSize15"
+            android:text="女"
+            android:layout_marginLeft="20dp"/>
+        <com.xuexiang.xui.widget.button.SmoothCheckBox
+            android:id="@+id/alter_info_check_nv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center_vertical"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/BLACK"
+        android:textSize="@dimen/textSize15"
+        android:text="原密码" />
+
+    <EditText
+        android:id="@+id/alter_info_input_original_pswd"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_rectangle_textview"
+        android:hint="请输入原密码(必填)"
+        android:inputType="textPassword"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/BLACK"
+        android:textSize="@dimen/textSize15"
+        android:text="新密码" />
+
+    <EditText
+        android:id="@+id/alter_info_input_new_pswd"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_rectangle_textview"
+        android:inputType="textPassword"
+        android:hint="请输入密码(必填)"
+        android:maxLength="20"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/BLACK"
+        android:textSize="@dimen/textSize15"
+        android:text="确认新密码" />
+
+    <EditText
+        android:id="@+id/alter_info_input_new_pswd_re"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/shape_rectangle_textview"
+        android:inputType="textPassword"
+        android:hint="请输入确认密码(必填)"
+        android:maxLength="20"/>
+
+</LinearLayout>

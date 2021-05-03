@@ -1,5 +1,8 @@
 package com.lqk.effecteam.team.chat;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
+import com.lqk.effecteam.common.data.ChatMessageData;
+import com.lqk.effecteam.common.entity.ChatMessage;
+import com.lqk.effecteam.common.util.HttpUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -20,10 +26,16 @@ import java.util.List;
  */
 public class TeamChatAdapter extends RecyclerView.Adapter<TeamChatAdapter.TeamChatViewHolder> {
 
-    private List<Message> mMessageList;
+    private List<ChatMessageData> chatMessageList;
+    private Activity activity;
 
-    public TeamChatAdapter(List<Message> mMessageList) {
-        this.mMessageList = mMessageList;
+    public TeamChatAdapter(List<ChatMessageData> chatMessageList, Activity activity) {
+        this.chatMessageList = chatMessageList;
+        this.activity = activity;
+    }
+
+    public void setChatMessageList(List<ChatMessageData> chatMessageList) {
+        this.chatMessageList = chatMessageList;
     }
 
     @NonNull
@@ -36,19 +48,22 @@ public class TeamChatAdapter extends RecyclerView.Adapter<TeamChatAdapter.TeamCh
 
     @Override
     public void onBindViewHolder(@NonNull TeamChatViewHolder holder, int position) {
+        SharedPreferences sp = activity.getSharedPreferences(HttpUtil.Shared_File_Name, Context.MODE_PRIVATE);
+        int userId = sp.getInt("userId", 0);
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         //对日期和时间的处理开始
         if (position == 0){
-            holder.mDateText.setText(dateFormat.format(mMessageList.get(position).getDate()));
-            holder.mTimeText.setText(timeFormat.format(mMessageList.get(position).getDate()));
+            holder.mDateText.setText(dateFormat.format(chatMessageList.get(position).getDate()));
+            holder.mTimeText.setText(timeFormat.format(chatMessageList.get(position).getDate()));
         }
         else{
             //如果日期发生了变化，就要重新显示日期
-            String curDate = dateFormat.format(mMessageList.get(position).getDate());
-            String pasDate = dateFormat.format(mMessageList.get(position - 1).getDate());
-            String curTime = timeFormat.format(mMessageList.get(position).getDate());
-            String pasTime = dateFormat.format(mMessageList.get(position - 1).getDate());
+            String curDate = dateFormat.format(chatMessageList.get(position).getDate());
+            String pasDate = dateFormat.format(chatMessageList.get(position - 1).getDate());
+            String curTime = timeFormat.format(chatMessageList.get(position).getDate());
+            String pasTime = dateFormat.format(chatMessageList.get(position - 1).getDate());
             if(curDate.equals(pasDate)){
                 holder.mDateText.setVisibility(View.GONE);
             }
@@ -65,26 +80,26 @@ public class TeamChatAdapter extends RecyclerView.Adapter<TeamChatAdapter.TeamCh
         }
         //对日期和时间的处理结束
 
-        // TODO 当前用户ID虚拟
-        if(mMessageList.get(position).getSenderId() == 0){
+
+        if(chatMessageList.get(position).getSenderId() == userId){
             holder.mReceiveLinear.setVisibility(View.GONE);
-            holder.mSendContentText.setText(mMessageList.get(position).getContent());
-            //String sendUserName = TeamVirtualData.userArrayList.get(mMessageList.get(position).getSenderId()).getUserName();
-            //holder.mSendHeadText.setText(sendUserName.substring(sendUserName.length() - 2, sendUserName.length()));
-            //holder.mSendNameText.setText(sendUserName);
+            holder.mSendContentText.setText(chatMessageList.get(position).getContent());
+            String sendUserName = chatMessageList.get(position).getSenderName();
+            holder.mSendHeadText.setText(sendUserName.substring(sendUserName.length() - 2, sendUserName.length()));
+            holder.mSendNameText.setText(sendUserName);
         }
         else {
             holder.mSendLinear.setVisibility(View.GONE);
-            holder.mReceiveContentText.setText(mMessageList.get(position).getContent());
-            //String sendUserName = TeamVirtualData.userArrayList.get(mMessageList.get(position).getSenderId()).getUserName();
-            //holder.mReceiveHeadText.setText(sendUserName.substring(sendUserName.length() - 2, sendUserName.length()));
-            //holder.mReceiveNameText.setText(sendUserName);
+            holder.mReceiveContentText.setText(chatMessageList.get(position).getContent());
+            String sendUserName =chatMessageList.get(position).getSenderName();
+            holder.mReceiveHeadText.setText(sendUserName.substring(sendUserName.length() - 2, sendUserName.length()));
+            holder.mReceiveNameText.setText(sendUserName);
         }
     }
 
     @Override
     public int getItemCount() {
-        return mMessageList.size();
+        return chatMessageList.size();
     }
 
     class TeamChatViewHolder extends RecyclerView.ViewHolder{

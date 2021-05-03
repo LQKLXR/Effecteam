@@ -51,6 +51,8 @@ public class MainActivity extends BaseActivity {
 
     }
 
+
+
     @SuppressLint("WrongConstant")
     private void initView() {
         fragmentManager = getSupportFragmentManager();

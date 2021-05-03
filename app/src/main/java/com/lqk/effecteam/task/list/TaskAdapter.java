@@ -1,6 +1,7 @@
 package com.lqk.effecteam.task.list;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.lqk.effecteam.R;
 import com.lqk.effecteam.common.comparator.TaskComparator;
 import com.lqk.effecteam.common.entity.Task;
+import com.lqk.effecteam.task.create.TaskCreateActivity;
 import com.xuexiang.xui.widget.button.shadowbutton.ShadowButton;
 import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 
@@ -84,6 +86,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         stringBuffer.append(simpleDateFormat.format(taskList.get(position).getMaxDate()));
         holder.mTaskInfo.setText(stringBuffer.toString());
         holder.mTaskId = taskList.get(position).getId();
+        holder.position = position;
     }
 
     @Override
@@ -99,6 +102,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         private ShadowButton mSuperButton;
 
         private int mTaskId;
+        private int position;
+
 
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -119,6 +124,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
                                 case 0:
                                     break;
                                 case 1:
+                                    Intent intent = new Intent(activity, TaskCreateActivity.class);
+                                    intent.putExtra("type", TaskCreateActivity.ALTER);
+                                    intent.putExtra("taskName", taskList.get(this.position).getName());
+                                    intent.putExtra("taskContent", taskList.get(this.position).getContent());
+                                    intent.putExtra("taskPriority", taskList.get(this.position).getPriority());
+                                    intent.putExtra("projectId", taskList.get(this.position).getProjectId());
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                    String maxDateString = sdf.format(taskList.get(this.position).getMaxDate());
+                                    intent.putExtra("maxDate", maxDateString);
+                                    intent.putExtra("taskId", taskList.get(this.position).getId());
+                                    activity.startActivity(intent);
                                     break;
                                 case 2:
                                     /*弹出菜单，完成项目的确认*/

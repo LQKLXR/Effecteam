@@ -21,6 +21,7 @@ import com.lqk.effecteam.mine.dynamic.MineDynamicActivity;
 import com.lqk.effecteam.mine.task.MineTaskActivity;
 import com.xuexiang.xui.widget.button.shadowbutton.ShadowButton;
 import com.xuexiang.xui.widget.textview.supertextview.SuperButton;
+import com.xuexiang.xui.widget.textview.supertextview.SuperTextView;
 
 /**
  * Create By LiuQK on 2021/4/15
@@ -29,11 +30,13 @@ import com.xuexiang.xui.widget.textview.supertextview.SuperButton;
 public class MineFragment extends Fragment {
 
 
-    private ShadowButton mMineTodoButton;
+    //private ShadowButton mMineTodoButton;
     private ShadowButton mMineTaskButton;
     private ShadowButton mMineDynamicButton;
     private ShadowButton mMineDownloadButton;
     private SuperButton mMineLogoutButton;
+
+    private SuperTextView mChangeInfoText;
 
 
 
@@ -48,11 +51,16 @@ public class MineFragment extends Fragment {
     }
 
     private void initView(View view) {
-        mMineTodoButton = view.findViewById(R.id.mine_todo_button);
+        //mMineTodoButton = view.findViewById(R.id.mine_todo_button);
         mMineTaskButton = view.findViewById(R.id.mine_task_button);
         mMineDynamicButton = view.findViewById(R.id.mine_dynamic_button);
         mMineDownloadButton = view.findViewById(R.id.mine_download_button);
         mMineLogoutButton = view.findViewById(R.id.mine_logout_button);
+        mChangeInfoText = view.findViewById(R.id.mine_change_info_text);
+        mChangeInfoText.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), AlertInfoActivity.class);
+            startActivity(intent);
+        });
 
         addListener(view);
     }

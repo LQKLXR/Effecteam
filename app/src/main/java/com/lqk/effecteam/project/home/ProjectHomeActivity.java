@@ -48,6 +48,7 @@ public class ProjectHomeActivity extends BaseActivity {
         List<Fragment> fragmentList = new ArrayList<>();
         mTaskFragment = new TaskFragment();
         mDynamicsFragment = new DynamicsFragment();
+        mDynamicsFragment.setType(DynamicsFragment.PROJECT);
         mDocFragment = new DocFragment();
         mDocFragment.setType(DocFragment.PROJECT);
         fragmentList.add(mTaskFragment);

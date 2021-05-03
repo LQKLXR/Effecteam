@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -48,17 +49,32 @@ public class TaskCreateActivity extends BaseActivity {
     private RoundButton mTaskCreateDocPickButton;
     /*最大日期选择*/
     private RoundButton mTaskCreateMaxDateButton;
+    private TextView mTaskCreateMemberText;
+    private TextView mTaskCreateDocText;
+
+
+
+    /*输出文档选择文字提示*/
+    private TextView mOutText;
+    /*输出文档选择*/
+    private RoundButton mTaskCreateDocOutButton;
 
 
     private ArrayList<Integer> taskUserList;
     private ArrayList<Integer> taskDocList;
+    private ArrayList<Integer> taskDocOutList;
     private String maxDateString;
 
 
     private static final int PICK_DATE_REQUEST = 0;
     private static final int PICK_MEMBER_REQUEST = 1;
     private static final int PICK_DOC_REQUEST = 2;
+    private static final int PICK_DOC_OUT_REQUEST = 3;
 
+    public static final int ALTER = 1;
+
+    private int type = 0;
+    private int taskId = 0;
 
     private Handler handler = new Handler() {
         @Override
@@ -78,7 +94,6 @@ public class TaskCreateActivity extends BaseActivity {
         }
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +111,50 @@ public class TaskCreateActivity extends BaseActivity {
         mTaskCreateMemberPickButton = findViewById(R.id.task_create_member_pick_button);
         mTaskCreateDocPickButton = findViewById(R.id.task_create_doc_pick_button);
         mTaskCreateMaxDateButton = findViewById(R.id.task_create_max_date_button);
+        mTaskCreateDocOutButton = findViewById(R.id.task_create_doc_out_pick_button);
+        mOutText = findViewById(R.id.task_create_out_text);
+
+
+        type = getIntent().getIntExtra("type", 0);
+
+        if (type == ALTER) {
+            String taskName = getIntent().getStringExtra("taskName");
+            String content = getIntent().getStringExtra("taskContent");
+            int priority = getIntent().getIntExtra("taskPriority", 0);
+            String maxDate = getIntent().getStringExtra("maxDate");
+            int projectId = getIntent().getIntExtra("projectId", 0);
+            taskId = getIntent().getIntExtra("taskId", 0);
+            this.maxDateString = maxDate;
+
+            mTaskCreateTaskName.setContentText(taskName);
+            mTaskCreateTaskContent.setContentText(content);
+            if (priority == 1) {
+                mTaskCreateTaskPriorityHigh.setChecked(true);
+            }
+            else if (priority == 2) {
+                mTaskCreateTaskPriorityMiddle.setChecked(true);
+            }
+            else if (priority == 3) {
+                mTaskCreateTaskPriorityLow.setChecked(true);
+            }
+
+            mTaskCreateMaxDateButton.setText("已选择 " + maxDate);
+            mTaskCreateMemberText = findViewById(R.id.task_create_member_text);
+            mTaskCreateDocText = findViewById(R.id.task_create_doc_text);
+            mTaskCreateMemberText.setVisibility(View.GONE);
+            mTaskCreateDocText.setVisibility(View.GONE);
+            mTaskCreateMemberPickButton.setVisibility(View.GONE);
+            mTaskCreateDocPickButton.setVisibility(View.GONE);
+            mOutText.setVisibility(View.VISIBLE);
+            mTaskCreateDocOutButton.setVisibility(View.VISIBLE);
+            mTaskCreateDocOutButton.setOnClickListener(v -> {
+                Intent intent = new Intent(TaskCreateActivity.this, PickActivity.class);
+                intent.putExtra("projectId", projectId);
+                intent.putExtra("type", PICK_DOC_OUT_REQUEST);
+                startActivityForResult(intent, PICK_DOC_OUT_REQUEST);
+            });
+        }
+
         addListener();
     }
 
@@ -109,69 +168,14 @@ public class TaskCreateActivity extends BaseActivity {
         mTaskCreateTitleBar.setLeftClickListener(v -> {
             finish();
         });
-        mTaskCreateTitleBar.addAction(new TitleBar.TextAction("确定") {
-            @Override
-            public void performAction(View view) {
-
-                if (mTaskCreateTaskName.isEmpty()
-                        || mTaskCreateTaskContent.isEmpty()
-                        || (!mTaskCreateTaskPriorityLow.isChecked() && !mTaskCreateTaskPriorityMiddle.isChecked() && !mTaskCreateTaskPriorityHigh.isChecked())
-                        || taskUserList == null
-                        || taskUserList.size() == 0
-                        || maxDateString == null) {
-                    Toast.makeText(TaskCreateActivity.this, "缺少必填内容！", Toast.LENGTH_SHORT).show();
-                }
-
-                /*开始组装 TaskData 数据*/
-                TaskData taskData = new TaskData();
-                taskData.setName(mTaskCreateTaskName.getContentText());
-                taskData.setContent(mTaskCreateTaskContent.getContentText());
-                taskData.setProjectId(projectId);
-                taskData.setUserId(userId);
-                if (mTaskCreateTaskPriorityLow.isChecked()) {
-                    taskData.setPriority(3);
-                } else if (mTaskCreateTaskPriorityMiddle.isChecked()) {
-                    taskData.setPriority(2);
-                } else if (mTaskCreateTaskPriorityHigh.isChecked()) {
-                    taskData.setPriority(1);
-                }
-                taskData.setMaxDateString(maxDateString);
-                taskData.setUserIdList(taskUserList);
-                taskData.setDocIdList(taskDocList);
-                /*结束组装 TaskData 数据*/
-
-                /* 开始网络任务 */
-                String url = "createTask";
-                Gson gson = new Gson();
-                String json = gson.toJson(taskData);
-                RequestBody requestBody = RequestBody.create(HttpUtil.JSON_TYPE, json);
-                HttpUtil.connectInternet(url, requestBody, new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-                        Message message = Message.obtain();
-                        message.what = 1;
-                        handler.sendMessage(message);
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        String body = new String(response.body().bytes());
-                        Message message = Message.obtain();
-                        message.obj = body;
-                        if (body.equals("success")){
-                            message.what = 2;
-                        }
-                        else {
-                            message.what = 3;
-                        }
-                        handler.sendMessage(message);
-
-                    }
-                });
 
 
-            }
-        });
+        if (type == ALTER){
+            mTaskCreateTitleBar.addAction(alterAction);
+        }
+        else {
+            mTaskCreateTitleBar.addAction(createAction);
+        }
 
         /*优先级选择*/
         mTaskCreateTaskPriorityLow.setOnCheckedChangeListener((checkBox, isChecked) -> {
@@ -232,7 +236,139 @@ public class TaskCreateActivity extends BaseActivity {
                 String dateString = data.getStringExtra("dateString");
                 this.maxDateString = dateString;
                 mTaskCreateMaxDateButton.setText("已选择 " + dateString);
+            } else if (requestCode == PICK_DOC_OUT_REQUEST){
+                ArrayList<Integer> taskDocOuts = data.getIntegerArrayListExtra("taskDocList");
+                this.taskDocOutList = taskDocOuts;
+                mTaskCreateDocOutButton.setText("已选择" + taskDocOutList.size() + "个文档");
             }
+
         }
     }
+
+    private TitleBar.TextAction createAction = new TitleBar.TextAction("确定") {
+        @Override
+        public void performAction(View view) {
+            int projectId = getIntent().getIntExtra("projectId", 0);
+            SharedPreferences sharedPreferences = getSharedPreferences(HttpUtil.Shared_File_Name, MODE_PRIVATE);
+            int userId = sharedPreferences.getInt("userId", 0);
+            if (mTaskCreateTaskName.isEmpty()
+                    || mTaskCreateTaskContent.isEmpty()
+                    || (!mTaskCreateTaskPriorityLow.isChecked() && !mTaskCreateTaskPriorityMiddle.isChecked() && !mTaskCreateTaskPriorityHigh.isChecked())
+                    || taskUserList == null
+                    || taskUserList.size() == 0
+                    || maxDateString == null) {
+                Toast.makeText(TaskCreateActivity.this, "缺少必填内容！", Toast.LENGTH_SHORT).show();
+            }
+
+            /*开始组装 TaskData 数据*/
+            TaskData taskData = new TaskData();
+            taskData.setName(mTaskCreateTaskName.getContentText());
+            taskData.setContent(mTaskCreateTaskContent.getContentText());
+            taskData.setProjectId(projectId);
+            taskData.setUserId(userId);
+            if (mTaskCreateTaskPriorityLow.isChecked()) {
+                taskData.setPriority(3);
+            } else if (mTaskCreateTaskPriorityMiddle.isChecked()) {
+                taskData.setPriority(2);
+            } else if (mTaskCreateTaskPriorityHigh.isChecked()) {
+                taskData.setPriority(1);
+            }
+            taskData.setMaxDateString(maxDateString);
+            taskData.setUserIdList(taskUserList);
+            taskData.setDocIdList(taskDocList);
+            /*结束组装 TaskData 数据*/
+
+            /* 开始网络任务 */
+            String url = "createTask";
+            Gson gson = new Gson();
+            String json = gson.toJson(taskData);
+            RequestBody requestBody = RequestBody.create(HttpUtil.JSON_TYPE, json);
+            HttpUtil.connectInternet(url, requestBody, new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Message message = Message.obtain();
+                    message.what = 1;
+                    handler.sendMessage(message);
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String body = new String(response.body().bytes());
+                    Message message = Message.obtain();
+                    message.obj = body;
+                    if (body.equals("success")){
+                        message.what = 2;
+                    }
+                    else {
+                        message.what = 3;
+                    }
+                    handler.sendMessage(message);
+                }
+            });
+        }
+    };
+
+
+    private TitleBar.TextAction alterAction = new TitleBar.TextAction("确定") {
+        @Override
+        public void performAction(View view) {
+            int taskId = getIntent().getIntExtra("taskId", 0);
+            int projectId = getIntent().getIntExtra("projectId", 0);
+            SharedPreferences sharedPreferences = getSharedPreferences(HttpUtil.Shared_File_Name, MODE_PRIVATE);
+            int userId = sharedPreferences.getInt("userId", 0);
+            if (mTaskCreateTaskName.isEmpty()
+                    || mTaskCreateTaskContent.isEmpty()
+                    || (!mTaskCreateTaskPriorityLow.isChecked() && !mTaskCreateTaskPriorityMiddle.isChecked() && !mTaskCreateTaskPriorityHigh.isChecked())
+                    || maxDateString == null) {
+                Toast.makeText(TaskCreateActivity.this, "缺少必填内容！", Toast.LENGTH_SHORT).show();
+            }
+
+            /*开始组装 TaskData 数据*/
+            TaskData taskData = new TaskData();
+            taskData.setId(taskId);
+            taskData.setProjectId(projectId);
+            taskData.setName(mTaskCreateTaskName.getContentText());
+            taskData.setContent(mTaskCreateTaskContent.getContentText());
+            taskData.setUserId(userId);
+            if (mTaskCreateTaskPriorityLow.isChecked()) {
+                taskData.setPriority(3);
+            } else if (mTaskCreateTaskPriorityMiddle.isChecked()) {
+                taskData.setPriority(2);
+            } else if (mTaskCreateTaskPriorityHigh.isChecked()) {
+                taskData.setPriority(1);
+            }
+            taskData.setMaxDateString(maxDateString);
+            taskData.setDocOutIdList(taskDocOutList);
+            /*结束组装 TaskData 数据*/
+
+            /* 开始网络任务 */
+            String url = "alterTask";
+            Gson gson = new Gson();
+            String json = gson.toJson(taskData);
+            RequestBody requestBody = RequestBody.create(HttpUtil.JSON_TYPE, json);
+            HttpUtil.connectInternet(url, requestBody, new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Message message = Message.obtain();
+                    message.what = 1;
+                    handler.sendMessage(message);
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String body = new String(response.body().bytes());
+                    Message message = Message.obtain();
+                    message.obj = body;
+                    if (body.equals("success")){
+                        message.what = 2;
+                    }
+                    else {
+                        message.what = 3;
+                    }
+                    handler.sendMessage(message);
+                }
+            });
+        }
+    };
+
 }

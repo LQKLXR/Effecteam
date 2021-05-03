@@ -94,26 +94,27 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
             /*剩余的天数*/
             long leftTime = projectList.get(position).getMaxDate().getTime() - System.currentTimeMillis();
             int leftDay = (int) (leftTime / (24 * 60 * 60 * 1000));
-            if (leftDay >= 30) {
+            if (leftDay >= 60) {
                 holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent3));
                 holder.mMaxTime.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent3));
                 holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent3));
-            } else if (leftDay >= 10) {
+            } else if (leftDay >= 30) {
                 holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent2));
                 holder.mMaxTime.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent2));
                 holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent2));
-            } else if (leftDay < 0){
-                holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectOutDate));
-                holder.mMaxTime.setBackgroundColor(activity.getResources().getColor(R.color.projectOutDate));
-                holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectOutDate));
-            } else {
+            } else if (leftDay >= 0) {
                 holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent1));
                 holder.mMaxTime.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent1));
                 holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectUrgent1));
+            } else {
+                holder.mProjectName.setBackgroundColor(activity.getResources().getColor(R.color.projectOutDate));
+                holder.mMaxTime.setBackgroundColor(activity.getResources().getColor(R.color.projectOutDate));
+                holder.mProjectButton.setBackgroundColor(activity.getResources().getColor(R.color.projectOutDate));
             }
             holder.mMaxTime.setText("截止日期: " + simpleDateFormat.format(projectList.get(position).getMaxDate()) + "     剩余: " + leftDay + " 天");
             holder.projectId = projectList.get(position).getId();
         }
+        holder.position = position;
     }
 
     @Override
@@ -133,6 +134,7 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
         private TextView mProjectButton;
         //项目ID，负责菜单操作等等
         private int projectId;
+        private int position;
 
         public ProjectViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -164,7 +166,11 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ProjectV
                                     /* 把项目ID带入下一个Activity */
                                     intent = new Intent(activity, ProjectAlertActivity.class);
                                     intent.putExtra("projectId", projectId);
-                                    activity.startActivity(intent);
+                                    intent.putExtra("projectName", projectList.get(position - 1).getName());
+                                    intent.putExtra("projectInfo", projectList.get(position - 1).getInfo());
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                    intent.putExtra("projectEndDate", sdf.format(projectList.get(position - 1).getMaxDate()));
+                                    activity.startActivityForResult(intent, 110);
                                     break;
                                 case 2:
                                     /*弹出菜单，归档项目的确认*/

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lqk.effecteam.R;
+import com.lqk.effecteam.common.data.DynamicData;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -21,12 +22,21 @@ import java.util.List;
  */
 public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DynamicViewHolder>{
 
-    private List<Dynamic> dynamicList;
+    private List<DynamicData> dynamicDataList;
     private Activity activity;
+    private int type;
 
-    public DynamicAdapter(List<Dynamic> dynamicList, Activity activity) {
-        this.dynamicList = dynamicList;
+    public DynamicAdapter(List<DynamicData> dynamicDataList, Activity activity) {
+        this.dynamicDataList = dynamicDataList;
         this.activity = activity;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public void setDynamicDataList(List<DynamicData> dynamicDataList) {
+        this.dynamicDataList = dynamicDataList;
     }
 
     @NonNull
@@ -44,24 +54,34 @@ public class DynamicAdapter extends RecyclerView.Adapter<DynamicAdapter.DynamicV
         String colorObject = activity.getResources().getString(R.string.dynamicObject);
 
         StringBuffer stringBuffer = new StringBuffer();
-        //stringBuffer.append("<font color='").append(colorUser).append("'>").append(TeamVirtualData.userArrayList.get(dynamicList.get(position).getUserId()).getUserName()).append("</font>");
-        stringBuffer.append("  <font color='").append(colorAction).append("'>").append(dynamicList.get(position).getAction()).append("</font>");
-        stringBuffer.append("  <font color='").append(colorObject).append("'>").append(dynamicList.get(position).getObject()).append("</font>");
+        if (type == DynamicsFragment.MINE){
+            stringBuffer.append("<font color='").append(colorUser).append("'>").append("我").append("</font>");
+        }
+        else if(type == DynamicsFragment.PROJECT){
+            stringBuffer.append("<font color='").append(colorUser).append("'>").append(dynamicDataList.get(position).getUserName()).append("</font>");
+        }
+
+        if (type == DynamicsFragment.MINE){
+            stringBuffer.append("  <font color='").append(colorAction).append("'>").append(" 在项目 ").append("</font>");
+            stringBuffer.append("  <font color='").append(colorObject).append("'>[")
+                    .append(dynamicDataList.get(position).getProjectName()).append("]</font>");
+            stringBuffer.append("  <font color='").append(colorAction).append("'>").append("中 ").append("</font>");
+        }
+        stringBuffer.append("  <font color='").append(colorAction).append("'>").append(dynamicDataList.get(position).getAction()).append("</font>");
+        stringBuffer.append("  <font color='").append(colorObject).append("'>").append(dynamicDataList.get(position).getObject()).append("</font>");
         String htmlString = stringBuffer.toString();
         holder.mContent.setText(Html.fromHtml(htmlString));
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
-        holder.mDate.setText(simpleDateFormat.format(dynamicList.get(position).getDate()));
+        holder.mDate.setText(simpleDateFormat.format(dynamicDataList.get(position).getDate()));
     }
 
     @Override
     public int getItemCount() {
-        return dynamicList.size();
+        return dynamicDataList.size();
     }
 
-    public void setDynamicList(List<Dynamic> dynamicList) {
-        this.dynamicList = dynamicList;
-    }
+
 
 
     class DynamicViewHolder extends RecyclerView.ViewHolder{

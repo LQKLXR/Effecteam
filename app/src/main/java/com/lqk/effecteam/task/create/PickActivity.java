@@ -1,6 +1,7 @@
 package com.lqk.effecteam.task.create;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -75,6 +76,8 @@ public class PickActivity extends BaseActivity {
 
 
     private void addListener() {
+        SharedPreferences sharedPreferences = getSharedPreferences(HttpUtil.Shared_File_Name, MODE_PRIVATE);
+        int userId = sharedPreferences.getInt("userId", 0);
         /*点击返回按钮的时候，携带数据返回上一个Activity*/
         mTitleBar.setLeftClickListener(v -> {
             finish();
@@ -85,7 +88,7 @@ public class PickActivity extends BaseActivity {
         /*选择人员*/
         if (getIntent().getIntExtra("type", 0) == 1) {
             mTitleBar.setTitle("选择参与人员");
-            url = "getProjectUserList?projectId=" + projectId;
+            url = "getProjectUserList?projectId=" + projectId ;
             /*点击确定的时候*/
             mTitleBar.addAction(new TitleBar.TextAction("确定") {
                 @Override
@@ -100,7 +103,7 @@ public class PickActivity extends BaseActivity {
         /*选择文档*/
         else {
             mTitleBar.setTitle("选择参考文档");
-            url = "getProjectDocList?projectId=" + projectId;
+            url = "getProjectDocList?projectId=" + projectId + "&userId=" + userId;
             /*点击确定的时候*/
             mTitleBar.addAction(new TitleBar.TextAction("确定") {
                 @Override

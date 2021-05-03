@@ -90,6 +90,7 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.TeamViewHolder
             itemView.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), TeamHomeActivity.class);
                 intent.putExtra("teamId", teamId);
+                intent.putExtra("teamName", mTeamName.getText().toString());
                 activity.startActivity(intent);
             });
         }

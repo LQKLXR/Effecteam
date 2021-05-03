@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginTop="5dp">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/viewholder_apply_notice_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/BLACK"
+            android:textSize="@dimen/textSize15"
+            android:maxEms="60"
+            android:ellipsize="end"
+            />
+        <TextView
+            android:id="@+id/viewholder_apply_notice_date"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/viewholder_apply_notice_status"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:textSize="@dimen/textSize15"
+        android:visibility="gone"
+        ></TextView>
+
+
+    <com.xuexiang.xui.widget.textview.supertextview.SuperButton
+        android:id="@+id/viewholder_apply_notice_accpet"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginRight="5dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        app:sSolidColor="@color/colorPrimary"
+        android:text="同意"
+        android:textSize="@dimen/textSize15"
+        android:textColor="@color/WHITE"
+        app:sCornersRadius="10dp"/>
+
+    <com.xuexiang.xui.widget.textview.supertextview.SuperButton
+        android:id="@+id/viewholder_apply_notice_refuse"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:textSize="@dimen/textSize15"
+        app:sCornersRadius="10dp"
+        android:text="拒绝"
+        android:textColor="@color/WHITE"
+        app:sSolidColor="#ff0000"/>
+
+
+</LinearLayout>

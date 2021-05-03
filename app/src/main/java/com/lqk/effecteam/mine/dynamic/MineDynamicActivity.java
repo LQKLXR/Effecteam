@@ -23,6 +23,7 @@ public class MineDynamicActivity extends BaseActivity {
         mMineDynamicTitleBar = findViewById(R.id.mine_dynamic_title_bar);
         mMineDynamicTitleBar.setLeftClickListener(v -> finish());
         mDynamicsFragment = new DynamicsFragment();
+        mDynamicsFragment.setType(DynamicsFragment.MINE);
         getSupportFragmentManager().beginTransaction().add(R.id.mine_dynamic_fragment_layout, mDynamicsFragment).commit();
     }
 }

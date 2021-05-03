@@ -1,4 +1,4 @@
-package com.lqk.effecteam.project.dynamic;
+package com.lqk.effecteam.common.entity;
 
 import java.util.Date;
 
@@ -10,13 +10,18 @@ public class Dynamic {
 
     private int id;
     private int userId;
+    private int projectId;
     private String action;
     private String object;
     private Date date;
 
-    public Dynamic(int id, int userId, String action, String object, Date date) {
+    public Dynamic() {
+    }
+
+    public Dynamic(int id, int userId, int projectId, String action, String object, Date date) {
         this.id = id;
         this.userId = userId;
+        this.projectId = projectId;
         this.action = action;
         this.object = object;
         this.date = date;
@@ -36,6 +41,14 @@ public class Dynamic {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 
     public String getAction() {

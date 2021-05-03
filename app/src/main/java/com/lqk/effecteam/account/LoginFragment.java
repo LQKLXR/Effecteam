@@ -71,8 +71,10 @@ public class LoginFragment extends Fragment {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     User user = (User) msg.obj;
                     editor.putInt("userId", user.getId());
+                    editor.putString("email", user.getEmail());
                     editor.putString("actualName", user.getActualName());
                     editor.putString("gender", user.getGender());
+                    editor.putString("password", user.getPassword());
                     editor.commit();
 
                     mLoadingDialog.dismiss();
@@ -103,7 +105,7 @@ public class LoginFragment extends Fragment {
         mLoginButton = view.findViewById(R.id.login_button);
         mToRegisterText = view.findViewById(R.id.to_register_text);
 
-        mLoadingDialog = new MaterialDialog.Builder(getActivity()).content(R.string.loginDialog)
+        mLoadingDialog = new MaterialDialog.Builder(getActivity()).content(R.string.loginLoading)
                 .progress(true, 0)
                 .progressIndeterminateStyle(false).build();
 

@@ -34,7 +34,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:orientation="horizontal">
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -51,7 +51,7 @@
                 app:sb_color_unpressed="@color/colorPrimary"
                 app:sb_color_pressed="@color/WHITE"
                 />
-        </LinearLayout>
+        </LinearLayout>-->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -104,12 +104,12 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:orientation="horizontal">
-        <LinearLayout
+       <!-- <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
-            <!--<com.xuexiang.xui.widget.textview.supertextview.SuperButton
+            &lt;!&ndash;<com.xuexiang.xui.widget.textview.supertextview.SuperButton
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center_horizontal"
@@ -120,14 +120,14 @@
                 app:sCornersRadius="20dp"
                 app:sSolidColor="@color/colorAccent"
                 app:sStrokeColor="@color/colorAccent"
-                app:sStrokeWidth="0.5dp" />-->
+                app:sStrokeWidth="0.5dp" />&ndash;&gt;
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:background="@drawable/icon_my_todo"
                 />
-        </LinearLayout>
+        </LinearLayout>-->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -182,14 +182,14 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:orientation="horizontal">
-        <TextView
+        <!--<TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textSize="@dimen/textSize15"
             android:text="待办事项"
             android:gravity="center"
-            android:textColor="@color/BLACK"/>
+            android:textColor="@color/BLACK"/>-->
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -224,6 +224,16 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:sLeftTextString="主题设置"
+        app:sRightIconRes="@drawable/icon_arrow_right"/>
+
+    <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+        android:id="@+id/mine_change_info_text"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:sLeftTextString="帐号设置"
         app:sRightIconRes="@drawable/icon_arrow_right"/>
 
     <com.xuexiang.xui.widget.textview.supertextview.SuperButton

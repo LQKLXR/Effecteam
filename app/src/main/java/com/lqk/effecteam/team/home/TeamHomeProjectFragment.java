@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -125,8 +126,9 @@ public class TeamHomeProjectFragment extends Fragment {
         mFloatingActionButton = view.findViewById(R.id.project_float_button);
         mFloatingActionButton.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), ProjectCreateActivity.class);
-            //TODO 携带项目唯一标识进去
-            startActivity(intent);
+            int teamId = getActivity().getIntent().getIntExtra("teamId", 0);
+            intent.putExtra("teamId", teamId);
+            startActivityForResult(intent, 120);
         });
 
         addListener();
@@ -310,5 +312,13 @@ public class TeamHomeProjectFragment extends Fragment {
         });
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 120 && resultCode == -1) {
+            String toast = data.getStringExtra("toast");
+            Toast.makeText(getActivity(), toast, Toast.LENGTH_SHORT).show();
+            loadProjectList();
+        }
+    }
 }
